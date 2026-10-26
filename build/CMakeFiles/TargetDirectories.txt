@@ -1,0 +1,4 @@
+/home/wmz/sharehash/build/CMakeFiles/sharehash.dir
+/home/wmz/sharehash/build/CMakeFiles/benchmark.dir
+/home/wmz/sharehash/build/CMakeFiles/edit_cache.dir
+/home/wmz/sharehash/build/CMakeFiles/rebuild_cache.dir

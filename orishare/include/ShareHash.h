@@ -289,7 +289,7 @@ namespace ShareHash {
                 }
             }
 
-            // 桶已满或初始桶不可用，尝试驱逐逻辑（用户指定不修改此部分）
+            // [修改1] 桶满时仍按原方向和 SEARCHRANGE 向右借位；修正下方空槽传递。
             int cur_bucket_num = bucket_num + 1; // 保持变量名与原代码一致
             int offset = 1;
             while (cur_bucket_num < top_index->bucket_num && offset < SEARCHRANGE) {
@@ -299,6 +299,7 @@ namespace ShareHash {
                         bucketInfo *current_eviction_bucket = top_index->buckets + temp_target_bucket_for_eviction;
                         bucketInfo *previous_eviction_bucket = top_index->buckets + temp_target_bucket_for_eviction - 1;
 
+                        // [修改1 BEGIN] 将右桶首槽腾空后交给左桶，保持键的所属桶不变。
                         int new_index = -1;
                         for (int k = 0; k < current_eviction_bucket->capacity; k++) {
                             if (current_eviction_bucket->begin_index + k >= top_index->item_num) break; // 越界检查
@@ -308,40 +309,41 @@ namespace ShareHash {
                             }
                         }
 
-                        int old_index = -1;
-                        for (int k = 0; k < previous_eviction_bucket->capacity; k++) {
-                             if (previous_eviction_bucket->begin_index + k >= top_index->item_num) break; // 越界检查
-                            if (!BITMAP_GET(top_index->none_bitmap, previous_eviction_bucket->begin_index + k)) {
-                                old_index = previous_eviction_bucket->begin_index + k;
-                                break;
-                            }
+                        // 原代码搬走左桶任意元素；现在只在右桶自己的区间内搬移首槽元素。
+                        int old_index = current_eviction_bucket->begin_index;
+                        if (current_eviction_bucket->capacity <= 0 || new_index < old_index ||
+                            old_index < 0 || new_index >= top_index->item_num ||
+                            previous_eviction_bucket->begin_index + previous_eviction_bucket->capacity != old_index) {
+                            break; // 没有可传递的连续空槽，不跨过无效边界继续借位。
                         }
 
-                        if (new_index == -1 || old_index == -1 || new_index >= top_index->item_num || old_index >= top_index->item_num) {
-                            temp_target_bucket_for_eviction--;
-                            continue;
-                        }
-
-                        SpinLock *first_lock = (old_index < new_index) ? &top_index->locks_[old_index] : &top_index->locks_[new_index];
-                        SpinLock *second_lock = (old_index < new_index) ? &top_index->locks_[new_index] : &top_index->locks_[old_index];
-
+                        SpinLock *first_lock = &top_index->locks_[old_index];
+                        // 首槽本来为空时 new_index == old_index，只获取一次锁。
+                        SpinLock *second_lock = (new_index == old_index) ? nullptr : &top_index->locks_[new_index];
                         first_lock->lock();
-                        second_lock->lock();
+                        if (second_lock) second_lock->lock();
 
-                        if (BITMAP_GET(top_index->none_bitmap, new_index) && !BITMAP_GET(top_index->none_bitmap, old_index)) {
-                            BITMAP_CLEAR(top_index->none_bitmap, new_index);
-                            BITMAP_SET(top_index->none_bitmap, old_index);
-                            bucket_items[new_index].key = bucket_items[old_index].key;
-                            bucket_items[new_index].value = bucket_items[old_index].value;
+                        bool transferred = false;
+                        if (BITMAP_GET(top_index->none_bitmap, new_index)) {
+                            if (!BITMAP_GET(top_index->none_bitmap, old_index)) {
+                                // 首槽中的键仍留在右桶，目标空槽在缩小后的右桶区间内。
+                                bucket_items[new_index].key = bucket_items[old_index].key;
+                                bucket_items[new_index].value = bucket_items[old_index].value;
+                                BITMAP_CLEAR(top_index->none_bitmap, new_index);
+                                BITMAP_SET(top_index->none_bitmap, old_index);
+                            }
 
-                            // 用户指定的桶边界移动逻辑
+                            // 交给左桶的是空槽；两桶占用数 counter 均不变。
                             current_eviction_bucket->begin_index++;
                             current_eviction_bucket->capacity--;
                             previous_eviction_bucket->capacity++;
+                            transferred = true;
                         }
-                        second_lock->unlock();
+                        if (second_lock) second_lock->unlock();
                         first_lock->unlock();
+                        if (!transferred) break;
                         temp_target_bucket_for_eviction--;
+                        // [修改1 END]
                     }
 
                     // 驱逐后，再次尝试在原始桶中插入
@@ -514,7 +516,20 @@ namespace ShareHash {
                 if (!BITMAP_GET(old_top_index->none_bitmap, i)) {
                     // 确保旧索引有效
                     if (i < old_top_index->item_num) {
-                         direct_insert_during_resize(old_bucket_items[i].key, old_bucket_items[i].value);
+                         // [修改2 BEGIN] 迁移必须逐条成功，失败时保留完整旧表。
+                         if (!direct_insert_during_resize(old_bucket_items[i].key, old_bucket_items[i].value)) {
+                             top_index = old_top_index;
+                             bucket_items = old_bucket_items;
+                             bucketItem_deallocator(new_bucket_items, new_top_index->item_num);
+                             bucketInfo_deallocator(new_top_index->buckets, new_top_index->bucket_num);
+                             bitmap_deallocator(new_top_index->none_bitmap, BITMAP_SIZE(new_top_index->item_num));
+                             delete[] new_top_index->locks_;
+                             topIndex_deallocator(new_top_index, 1);
+                             resize_lock_.unlock();
+                             std::cerr << "Error: Resize migration failed; original table retained." << std::endl;
+                             return false;
+                         }
+                         // [修改2 END]
                     }
                 }
             }
@@ -531,46 +546,12 @@ namespace ShareHash {
             return true;
         }
 
-        // 用于 resize 过程中的无锁插入方法 (外部已持有 resize_lock_)
-        void direct_insert_during_resize(const Key& key, const Value& value) {
-            // 此时 top_index 和 bucket_items 指向新的表结构
-            int bucket_num = hash_func(key) % top_index->bucket_num;
-            if (bucket_num < 0 || bucket_num >= top_index->bucket_num) {
-                std::cerr << "Error during resize insert: Invalid bucket number " << bucket_num << std::endl;
-                return;
-            }
-            struct bucketInfo *bucket = top_index->buckets + bucket_num;
-
-            // 在原始计算出的桶中尝试插入
-            for(int i = bucket->begin_index; i < bucket->begin_index + bucket->capacity; i++) {
-                if (i < 0 || i >= top_index->item_num) continue; // 边界检查
-                if (BITMAP_GET(top_index->none_bitmap, i)) {
-                    BITMAP_CLEAR(top_index->none_bitmap, i);
-                    bucket_items[i].key = key;
-                    bucket_items[i].value = value;
-                    bucket->counter++;
-                    return;
-                }
-            }
-
-            // 如果原始桶已满，尝试线性探测（与常规插入的驱逐逻辑不同，这里是简化版）
-            for (int offset = 1; offset < SEARCHRANGE ; offset++) {
-                int next_bucket_idx = (bucket_num + offset) % top_index->bucket_num; // 环形探测
-                struct bucketInfo *next_bucket = top_index->buckets + next_bucket_idx;
-                for(int i = next_bucket->begin_index; i < next_bucket->begin_index + next_bucket->capacity; i++) {
-                    if (i < 0 || i >= top_index->item_num) continue; // 边界检查
-                    if (BITMAP_GET(top_index->none_bitmap, i)) {
-                        BITMAP_CLEAR(top_index->none_bitmap, i);
-                        bucket_items[i].key = key;
-                        bucket_items[i].value = value;
-                        next_bucket->counter++;
-                        return;
-                    }
-                }
-            }
-            // 如果所有尝试都失败了，这在resize中是一个问题，可能意味着新表大小不足或哈希冲突严重
-            std::cerr << "Warning: Failed to insert item during resize for key (details omitted for brevity). Table might be full or hash collisions are high." << std::endl;
+        // [修改3 BEGIN] 扩容迁移复用本桶插入和修正后的右借位，禁止直接错放到其他桶。
+        bool direct_insert_during_resize(const Key& key, const Value& value) {
+            // 外部已持有 resize_lock_；true 保留原有的不重入全局锁、不递归扩容语义。
+            return insert(key, value, true);
         }
+        // [修改3 END]
 
         // 检查桶是否还有空间 (必须在持有 resize_lock_ 时调用)
         bool checkBucket(int bucket_idx) { // 参数名改为 bucket_idx 以避免与成员变量混淆

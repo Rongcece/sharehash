@@ -1,0 +1,116 @@
+{
+	"abstract" : true,
+	"backtrace" : 10,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"find_package",
+			"boost_find_component",
+			"set_property"
+		],
+		"files" : 
+		[
+			"/usr/lib/x86_64-linux-gnu/cmake/boost_atomic-1.71.0/boost_atomic-config.cmake",
+			"/usr/lib/x86_64-linux-gnu/cmake/boost_thread-1.71.0/boost_thread-config.cmake",
+			"/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake",
+			"/usr/share/cmake-4.2/Modules/FindBoost.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 4
+			},
+			{
+				"command" : 1,
+				"file" : 4,
+				"line" : 154,
+				"parent" : 0
+			},
+			{
+				"file" : 3,
+				"parent" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 3,
+				"line" : 610,
+				"parent" : 2
+			},
+			{
+				"file" : 2,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 182,
+				"parent" : 4
+			},
+			{
+				"command" : 1,
+				"file" : 2,
+				"line" : 117,
+				"parent" : 5
+			},
+			{
+				"file" : 1,
+				"parent" : 6
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 91,
+				"parent" : 7
+			},
+			{
+				"file" : 0,
+				"parent" : 8
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 9
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 92,
+				"parent" : 9
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	},
+	"id" : "Boost::atomic::@6890427a1f51a3e7e1df",
+	"imported" : true,
+	"interfaceCompileDependencies" : 
+	[
+		{
+			"backtrace" : 11,
+			"id" : "Boost::headers::@6890427a1f51a3e7e1df"
+		}
+	],
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 11,
+			"id" : "Boost::headers::@6890427a1f51a3e7e1df"
+		}
+	],
+	"local" : true,
+	"name" : "Boost::atomic",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sources" : [],
+	"type" : "UNKNOWN_LIBRARY"
+}

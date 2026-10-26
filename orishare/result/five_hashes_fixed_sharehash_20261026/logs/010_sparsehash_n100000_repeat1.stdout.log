@@ -1,0 +1,9 @@
+Hashmap type: sparsehash
+Dataset size: 100000
+Thread number: 1
+Hashmap insert throughput: 2.7914e+06 elements/second
+Hashmap read throughput: 1.20788e+07 elements/second
+Space consumption: 2097152bytes
+Index BPK (reported bytes/key): 20.9715
+Successful inserts: 100000, lookup hits: 100000
+Results saved to: /home/wmz/sharehash/orishare/result/five_hashes_fixed_sharehash_20261026/benchmark_results.csv

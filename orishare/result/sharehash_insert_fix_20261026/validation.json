@@ -1,0 +1,41 @@
+{
+  "production_source": "include/ShareHash.h",
+  "production_source_sha256": "9d4508ca98816a566521a4186c75dbcebaa35c81723d3f2cabfe697f5c49fe85",
+  "regression_source": "benchmark/sharehash_insert_regression.cpp",
+  "regression_source_sha256": "39722eceb2f602b71a383b90ef4579c3d6db3c5342e5b9a0b583784638773de5",
+  "regular_regression": {
+    "passed": 11,
+    "exit_code": 0
+  },
+  "asan_ubsan_regression": {
+    "passed": 11,
+    "exit_code": 0,
+    "asan_options": "detect_leaks=0:halt_on_error=1",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "leak_sanitizer": {
+    "completed": false,
+    "reason": "LeakSanitizer fatal error: does not work under ptrace; the eleven functional cases completed, then LSan could not run."
+  },
+  "before_fix_regression": [
+    {
+      "case": "right_donor_first_slot_occupied",
+      "exit_code": 1,
+      "failure": "get missed inserted key 0"
+    },
+    {
+      "case": "resize_home_bucket_full",
+      "exit_code": 1,
+      "failure": "get missed inserted key 7"
+    }
+  ],
+  "unchanged_code_verified_against_prechange_header": [
+    "get()",
+    "remove()",
+    "initialization and declarations",
+    "checkBucket() and memory accounting"
+  ],
+  "benchmark_jobs_passed": 9,
+  "csv_checksums_verified": true,
+  "source_checksums_match_benchmark_manifest": true
+}

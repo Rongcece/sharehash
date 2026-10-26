@@ -1,0 +1,47 @@
+{
+  "checked_utc": "2026-10-26T07:30:55+00:00",
+  "status": "passed",
+  "scope": "Result integrity and consistency checks; benchmark failures remain recorded in run_manifest.json.",
+  "expected_jobs": 45,
+  "observed_jobs": 45,
+  "passed_jobs": 36,
+  "failed_jobs": 9,
+  "passed_by_hashmap": {
+    "sharehash": 9,
+    "unorderedmap": 9,
+    "cuckoohash": 9,
+    "sparsehash": 9
+  },
+  "failed_by_hashmap": {
+    "mapembed": 9
+  },
+  "csv_row_counts": {
+    "benchmark_results.csv": 36,
+    "memory_results.csv": 42,
+    "summary.csv": 15,
+    "memory_summary.csv": 15
+  },
+  "csv_sha256_verified": {
+    "benchmark_results.csv": "c42c9d9176f47253f2b189ad51e1507f93d97069ca0cc8a8ed11e593678d6e31",
+    "memory_results.csv": "8253e85fce55d175bbb9d877cf6f8e8831b3de5925bbcf4fd2394c68a7882143",
+    "summary.csv": "4bd76ed2796d3e27a61beb138ef9012838286b972c949dc6dbacca259bfb18e1",
+    "memory_summary.csv": "d28220ddf9eaa97a1d0a5d56c510cd9e4993c823d0dd924885fdf3f70cc13ace"
+  },
+  "source_file_count_verified": 21,
+  "source_matches_previous_fixed_run": true,
+  "binary_matches_previous_fixed_run": true,
+  "binary_sha256_verified": "ae7b5c5b1a68cacfee752b19b710f8764c544856729ac6efab6a35bb4261da0d",
+  "sharehash_source_sha256_verified": "9d4508ca98816a566521a4186c75dbcebaa35c81723d3f2cabfe697f5c49fe85",
+  "job_combinations_seeds_commands_and_thread_parameters_verified": true,
+  "job_embedded_rows_match_csv_rows": true,
+  "all_heap_and_rss_estimate_formulas_verified": true,
+  "all_three_bpk_bytes_divided_by_requested_count_verified": true,
+  "payload_bytes_equal_16_times_requested_count_verified": true,
+  "throughput_matches_requested_count_divided_by_seconds_verified": true,
+  "all_summary_medians_counts_and_pass_counts_verified": true,
+  "mapembed_all_nine_exit_minus6_with_stack_smashing": true,
+  "mapembed_diagnostic_memory_samples": 6,
+  "mapembed_5m_missing_memory_samples": 3,
+  "correctness_scope": "Benchmark checks insertion return counts and lookup hit counts; full value equality is not checked by this run.",
+  "report_sha256": "9107b96844587c1c49960beb3c52e801783a229b8185bbffcee9813b77fb872f"
+}

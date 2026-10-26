@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/wmz/sharehash/build",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -I/home/wmz/sharehash/orishare/benchmark/competitors -I/home/wmz/sharehash/orishare/include -g -std=gnu++14 -pg -g -O1 -o CMakeFiles/sharehash.dir/main.cpp.o -c /home/wmz/sharehash/orishare/main.cpp",
+  "file": "/home/wmz/sharehash/orishare/main.cpp",
+  "output": "CMakeFiles/sharehash.dir/main.cpp.o"
+},
+{
+  "directory": "/home/wmz/sharehash/build",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DSHAREHASH_RESULT_DIR=\\\"/home/wmz/sharehash/orishare/result\\\" -I/home/wmz/sharehash/orishare/benchmark/competitors -I/home/wmz/sharehash/orishare/include -g -std=gnu++14 -pg -g -O1 -fopenmp -o CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o -c /home/wmz/sharehash/orishare/benchmark/benchmark.cpp",
+  "file": "/home/wmz/sharehash/orishare/benchmark/benchmark.cpp",
+  "output": "CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o"
+}
+]

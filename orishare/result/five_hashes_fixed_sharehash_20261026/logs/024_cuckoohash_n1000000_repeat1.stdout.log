@@ -1,0 +1,9 @@
+Hashmap type: cuckoohash
+Dataset size: 1000000
+Thread number: 1
+Hashmap insert throughput: 2.64656e+06 elements/second
+Hashmap read throughput: 9.9267e+06 elements/second
+Space consumption: 16777216bytes
+Index BPK (reported bytes/key): 16.7772
+Successful inserts: 1000000, lookup hits: 1000000
+Results saved to: /home/wmz/sharehash/orishare/result/five_hashes_fixed_sharehash_20261026/benchmark_results.csv

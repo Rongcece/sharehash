@@ -1,0 +1,186 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::atomic::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__atomic-Debug-f00d172e8c3d3b7fc5d0.json",
+					"name" : "Boost::atomic",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::boost::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__boost-Debug-67789e5da3bde4d9f23e.json",
+					"name" : "Boost::boost",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::diagnostic_definitions::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__diagnostic_definitions-Debug-a4e328761babaff208cd.json",
+					"name" : "Boost::diagnostic_definitions",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::disable_autolinking::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__disable_autolinking-Debug-5d5a4baa868db4d07aed.json",
+					"name" : "Boost::disable_autolinking",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::dynamic_linking::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__dynamic_linking-Debug-b537c9e992859a212692.json",
+					"name" : "Boost::dynamic_linking",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::headers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__headers-Debug-8b27f3570074586a99a9.json",
+					"name" : "Boost::headers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::program_options::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__program_options-Debug-87ce761a2b4a6f68ec1b.json",
+					"name" : "Boost::program_options",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::system::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__system-Debug-06c9c73c94e5ace563e0.json",
+					"name" : "Boost::system",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Boost::thread::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Boost__thread-Debug-d7a344f6cf5e3e5a87f3.json",
+					"name" : "Boost::thread",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "OpenMP::OpenMP_C::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-OpenMP__OpenMP_C-Debug-495a0fbf930f7c2ac622.json",
+					"name" : "OpenMP::OpenMP_C",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "OpenMP::OpenMP_CXX::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-OpenMP__OpenMP_CXX-Debug-396aa84f59f92d5d1a69.json",
+					"name" : "OpenMP::OpenMP_CXX",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Threads::Threads::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Threads__Threads-Debug-4f11da1cfb9bc4774e29.json",
+					"name" : "Threads::Threads",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-9ad1a58d4644cf6543fa.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "sharehash",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "benchmark::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-benchmark-Debug-e6b875873d40e7bfefb1.json",
+					"name" : "benchmark",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sharehash::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sharehash-Debug-28fb2d8d88d03671e26f.json",
+					"name" : "sharehash",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/wmz/sharehash/build",
+		"source" : "/home/wmz/sharehash/orishare"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	}
+}
