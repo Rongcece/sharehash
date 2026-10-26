@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="3" type="long" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage" />
+      <configuration PROFILE_NAME="Debug-覆盖率" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage" />
+      <configuration PROFILE_NAME="Debug-TSan" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DUSE_TSAN=ON" />
+      <configuration PROFILE_NAME="Debug-ASan" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DUSE_ASAN=ON" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="07608869-d6e9-4857-833a-a21efd07fd80" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/orishare/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/3.25.1/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/CMakeOutput.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/FindOpenMP/ompver_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/FindOpenMP/ompver_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/FindOpenMP/ompver_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/FindOpenMP/ompver_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/benchmark.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/main.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/CMakeFiles/sharehash.dir/main.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/benchmark" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/benchmark" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orishare/build/sharehash" beforeDir="false" afterPath="$PROJECT_DIR$/orishare/build/sharehash" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/orishare" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/include/ShareHash.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file:///usr/include/c++/12/bits/atomic_base.h" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2wr0i9Owk2e1qzcsvszd5RMezaH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "CMake Application.benchmark.executor": "Run",
+    "CMake 应用程序.benchmark.executor": "Valgrind",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHELLCHECK.PATH": "我会在意",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/data00/home/wangmingze.886/test_bishe/sharehash-learn/photo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "dynamic.analysis.tools.valgrind",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Space Code Reviews" show_stripe_button="false" />
+      <window_info id="Bookmarks" side_tool="true" />
+      <window_info id="Merge Requests" />
+      <window_info id="Backup and Sync History" />
+      <window_info id="Commit_Guest" show_stripe_button="false" />
+      <window_info id="Pull Requests" />
+      <window_info id="Learn" />
+      <window_info id="DFA" show_stripe_button="false" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.100504324" />
+      <window_info id="Commit" order="1" weight="0.15546875" />
+      <window_info id="Welcome to GitHub Copilot" order="2" show_stripe_button="false" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="File Transfer" />
+      <window_info anchor="bottom" id="Find" />
+      <window_info anchor="bottom" id="clangd" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.39621675" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" weight="0.32748812" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.39448208" />
+      <window_info anchor="bottom" id="Services" order="4" weight="0.2914646" />
+      <window_info anchor="bottom" id="CMake" order="5" weight="0.39448208" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.39448208" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.39448208" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.3273521" />
+      <window_info anchor="bottom" id="TODO" order="9" weight="0.3273521" />
+      <window_info anchor="bottom" id="Vcpkg" order="10" weight="0.3273521" />
+      <window_info anchor="bottom" id="Python Packages" order="11" weight="0.3273521" />
+      <window_info anchor="bottom" id="Profiler" order="12" weight="0.40997094" />
+      <window_info anchor="bottom" id="Coverage" order="13" sideWeight="0.4990566" weight="0.20280737" />
+      <window_info anchor="bottom" id="Trae AI Logger" order="14" weight="0.32748812" />
+      <window_info anchor="right" id="Trace View" />
+      <window_info anchor="right" id="make" side_tool="true" />
+      <window_info anchor="right" id="Python Console" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.3298797" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.25" />
+      <window_info anchor="right" id="github.copilotToolWindow" order="4" show_stripe_button="false" />
+      <window_info anchor="right" id="GitHub Copilot Chat" order="4" weight="0.61887383" />
+      <window_info anchor="right" id="Meson" order="5" />
+      <window_info anchor="right" id="Trae AI (Internal)" order="6" sideWeight="0.5009434" visible="true" weight="0.2575521" />
+    </layout>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="benchmark" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-t sharehash -d 100000" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="benchmark" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="benchmark">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="07608869-d6e9-4857-833a-a21efd07fd80" name="Changes" comment="" />
+      <created>1746784511070</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746784511070</updated>
+      <workItem from="1746784512605" duration="264000" />
+      <workItem from="1746784784356" duration="3765000" />
+      <workItem from="1748331796501" duration="16932000" />
+      <workItem from="1748599833522" duration="1971000" />
+      <workItem from="1748921200853" duration="140000" />
+      <workItem from="1748933053436" duration="9099000" />
+      <workItem from="1748943378740" duration="22084000" />
+      <workItem from="1750069272525" duration="11590000" />
+      <workItem from="1750143642760" duration="8330000" />
+      <workItem from="1750153564258" duration="9341000" />
+      <workItem from="1750217604745" duration="18525000" />
+      <workItem from="1762173322290" duration="3291000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="../../../../../data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug" NAME="benchmark 覆盖结果" MODIFIED="1756114704748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="../../../sharehash/cmake-build-debug" NAME="benchmark Coverage Results" MODIFIED="1762174361234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="../../../../../data00/home/wangmingze.886/../../../../../data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-" NAME="benchmark 覆盖结果" MODIFIED="1750067817519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="../../../../../data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-" NAME="benchmark 覆盖结果" MODIFIED="1756114232998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
