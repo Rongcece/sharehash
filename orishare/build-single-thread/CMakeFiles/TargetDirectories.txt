@@ -1,0 +1,4 @@
+/home/wmz/sharehash/orishare/build-single-thread/CMakeFiles/sharehash.dir
+/home/wmz/sharehash/orishare/build-single-thread/CMakeFiles/benchmark.dir
+/home/wmz/sharehash/orishare/build-single-thread/CMakeFiles/edit_cache.dir
+/home/wmz/sharehash/orishare/build-single-thread/CMakeFiles/rebuild_cache.dir

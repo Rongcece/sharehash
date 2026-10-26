@@ -1,0 +1,19 @@
+Hashmap type: sharehash
+Dataset size: 5000000
+Thread number: 1
+resize done!
+resize done!
+resize done!
+resize done!
+resize done!
+resize done!
+resize done!
+resize done!
+resize done!
+resize done!
+Hashmap insert throughput: 2.46219e+06 elements/second
+Hashmap read throughput: 5.37084e+06 elements/second
+Space consumption: 412160064bytes
+Index BPK (reported bytes/key): 82.432
+Successful inserts: 5000000, lookup hits: 4980133
+Results saved to: /home/wmz/sharehash/orishare/result/single_thread_20261025/benchmark_results.csv

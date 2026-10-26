@@ -1,0 +1,940 @@
+<?xml version="1.0"?>
+
+<valgrindoutput>
+
+<protocolversion>4</protocolversion>
+<protocoltool>memcheck</protocoltool>
+
+<preamble>
+  <line>Memcheck, a memory error detector</line>
+  <line>Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.</line>
+  <line>Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info</line>
+  <line>Command: /data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark -t cuckoohash -d 10000000</line>
+</preamble>
+
+<pid>3064910</pid>
+<ppid>2664684</ppid>
+<tool>memcheck</tool>
+
+<args>
+  <vargv>
+    <exe>/usr/bin/valgrind.bin</exe>
+    <arg>--tool=memcheck</arg>
+    <arg>--xml=yes</arg>
+    <arg>--xml-file=/tmp/clion-valgrind50440949-7521-4916-8f21-5de811b28d70/valgrind_output_%p</arg>
+    <arg>--gen-suppressions=all</arg>
+    <arg>--leak-check=full</arg>
+    <arg>--leak-resolution=med</arg>
+    <arg>--show-leak-kinds=all</arg>
+    <arg>--track-origins=yes</arg>
+    <arg>--vgdb=no</arg>
+  </vargv>
+  <argv>
+    <exe>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</exe>
+    <arg>-t</arg>
+    <arg>cuckoohash</arg>
+    <arg>-d</arg>
+    <arg>10000000</arg>
+  </argv>
+</args>
+
+<status>
+  <state>RUNNING</state>
+  <time>00:00:00:00.218 </time>
+</status>
+
+
+<status>
+  <state>FINISHED</state>
+  <time>00:00:08:28.723 </time>
+</status>
+
+<error>
+  <unique>0x0</unique>
+  <tid>1</tid>
+  <kind>Leak_StillReachable</kind>
+  <xwhat>
+    <text>8 bytes in 1 blocks are still reachable in loss record 1 of 7</text>
+    <leakedbytes>8</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x48417B4</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>malloc</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>381</line>
+    </frame>
+    <frame>
+      <ip>0x48D609C</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+    </frame>
+    <frame>
+      <ip>0x48E810A</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+    </frame>
+    <frame>
+      <ip>0x48D4841</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+    </frame>
+    <frame>
+      <ip>0x40049CD</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</obj>
+      <fn>call_init</fn>
+      <dir>./elf/./elf</dir>
+      <file>dl-init.c</file>
+      <line>74</line>
+    </frame>
+    <frame>
+      <ip>0x40049CD</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</obj>
+      <fn>call_init</fn>
+      <dir>./elf/./elf</dir>
+      <file>dl-init.c</file>
+      <line>26</line>
+    </frame>
+    <frame>
+      <ip>0x4004AB3</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</obj>
+      <fn>_dl_init</fn>
+      <dir>./elf/./elf</dir>
+      <file>dl-init.c</file>
+      <line>121</line>
+    </frame>
+    <frame>
+      <ip>0x401AB4F</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</obj>
+    </frame>
+    <frame>
+      <ip>0x4</ip>
+    </frame>
+    <frame>
+      <ip>0x1FFF000AC2</ip>
+    </frame>
+    <frame>
+      <ip>0x1FFF000B16</ip>
+    </frame>
+    <frame>
+      <ip>0x1FFF000B19</ip>
+    </frame>
+    <frame>
+      <ip>0x1FFF000B24</ip>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: reachable</skaux>
+    <sframe> <fun>malloc</fun> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <fun>call_init</fun> </sframe>
+    <sframe> <fun>call_init</fun> </sframe>
+    <sframe> <fun>_dl_init</fun> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   fun:call_init
+   fun:call_init
+   fun:_dl_init
+   obj:/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: reachable</skaux>
+    <sframe> <fun>malloc</fun> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <fun>call_init</fun> </sframe>
+    <sframe> <fun>call_init</fun> </sframe>
+    <sframe> <fun>_dl_init</fun> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <sframe> <obj>*</obj> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   fun:call_init
+   fun:call_init
+   fun:_dl_init
+   obj:/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+}
+]]>
+    </rawtext>
+  </suppression>
+<error>
+  <unique>0x1</unique>
+  <tid>1</tid>
+  <kind>Leak_IndirectlyLost</kind>
+  <xwhat>
+    <text>40 bytes in 1 blocks are indirectly lost in loss record 2 of 7</text>
+    <leakedbytes>40</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x4841F2F</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>422</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>allocate</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>new_allocator.h</file>
+      <line>137</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>allocate</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>alloc_traits.h</file>
+      <line>464</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>_M_get_node</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>stl_list.h</file>
+      <line>518</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>_M_create_node&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>stl_list.h</file>
+      <line>710</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>_M_insert&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>stl_list.h</file>
+      <line>2005</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>emplace_back&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>stl_list.h</file>
+      <line>1321</line>
+    </frame>
+    <frame>
+      <ip>0x124BF0</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::cuckoohash_map(unsigned long, std::hash&lt;unsigned long&gt; const&amp;, std::equal_to&lt;unsigned long&gt; const&amp;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt; const&amp;)</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>113</line>
+    </frame>
+    <frame>
+      <ip>0x124DB3</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>CuckooInterface&lt;unsigned long, unsigned long&gt;::init()</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark/./competitors/Cuckoo</dir>
+      <file>CuckooMapInterface.h</file>
+      <line>31</line>
+    </frame>
+    <frame>
+      <ip>0x117B28</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>106</line>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: indirect</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>_M_get_node</fun> </sframe>
+    <sframe> <fun>_M_create_node&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fun> </sframe>
+    <sframe> <fun>_M_insert&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fun> </sframe>
+    <sframe> <fun>emplace_back&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE4initEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:_Znwm
+   fun:allocate
+   fun:allocate
+   fun:_M_get_node
+   fun:_M_create_node<std::allocator<std::pair<long unsigned int const, long unsigned int> > >
+   fun:_M_insert<std::allocator<std::pair<long unsigned int const, long unsigned int> > >
+   fun:emplace_back<std::allocator<std::pair<long unsigned int const, long unsigned int> > >
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_
+   fun:_ZN15CuckooInterfaceImmE4initEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: indirect</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>_M_get_node</fun> </sframe>
+    <sframe> <fun>_M_create_node&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fun> </sframe>
+    <sframe> <fun>_M_insert&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fun> </sframe>
+    <sframe> <fun>emplace_back&lt;std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt; &gt;</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE4initEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:_Znwm
+   fun:allocate
+   fun:allocate
+   fun:_M_get_node
+   fun:_M_create_node<std::allocator<std::pair<long unsigned int const, long unsigned int> > >
+   fun:_M_insert<std::allocator<std::pair<long unsigned int const, long unsigned int> > >
+   fun:emplace_back<std::allocator<std::pair<long unsigned int const, long unsigned int> > >
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_
+   fun:_ZN15CuckooInterfaceImmE4initEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<error>
+  <unique>0x2</unique>
+  <tid>1</tid>
+  <kind>Leak_IndirectlyLost</kind>
+  <xwhat>
+    <text>120 bytes in 1 blocks are indirectly lost in loss record 3 of 7</text>
+    <leakedbytes>120</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x4841F2F</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>422</line>
+    </frame>
+    <frame>
+      <ip>0x124D8E</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>CuckooInterface&lt;unsigned long, unsigned long&gt;::init()</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark/./competitors/Cuckoo</dir>
+      <file>CuckooMapInterface.h</file>
+      <line>31</line>
+    </frame>
+    <frame>
+      <ip>0x117B28</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>106</line>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: indirect</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE4initEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:_Znwm
+   fun:_ZN15CuckooInterfaceImmE4initEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: indirect</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE4initEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:_Znwm
+   fun:_ZN15CuckooInterfaceImmE4initEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<error>
+  <unique>0x3</unique>
+  <tid>1</tid>
+  <kind>Leak_DefinitelyLost</kind>
+  <xwhat>
+    <text>176 (16 direct, 160 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7</text>
+    <leakedbytes>176</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x4841F2F</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>422</line>
+    </frame>
+    <frame>
+      <ip>0x117107</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>69</line>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: definite</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: definite</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<error>
+  <unique>0x4</unique>
+  <tid>1</tid>
+  <kind>Leak_StillReachable</kind>
+  <xwhat>
+    <text>192 bytes in 1 blocks are still reachable in loss record 5 of 7</text>
+    <leakedbytes>192</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x48417B4</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>malloc</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>381</line>
+    </frame>
+    <frame>
+      <ip>0x48D609C</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+    </frame>
+    <frame>
+      <ip>0x48E5F8B</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+    </frame>
+    <frame>
+      <ip>0x48DD099</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+      <fn>GOMP_parallel</fn>
+    </frame>
+    <frame>
+      <ip>0x117D51</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>126</line>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: reachable</skaux>
+    <sframe> <fun>malloc</fun> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <fun>GOMP_parallel</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   fun:GOMP_parallel
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: reachable</skaux>
+    <sframe> <fun>malloc</fun> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj> </sframe>
+    <sframe> <fun>GOMP_parallel</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+   fun:GOMP_parallel
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<error>
+  <unique>0x5</unique>
+  <tid>1</tid>
+  <kind>Leak_PossiblyLost</kind>
+  <xwhat>
+    <text>4,194,304 bytes in 1 blocks are possibly lost in loss record 6 of 7</text>
+    <leakedbytes>4194304</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x4841F2F</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>422</line>
+    </frame>
+    <frame>
+      <ip>0x1247F2</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>allocate</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>new_allocator.h</file>
+      <line>137</line>
+    </frame>
+    <frame>
+      <ip>0x1247F2</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>allocate</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>alloc_traits.h</file>
+      <line>464</line>
+    </frame>
+    <frame>
+      <ip>0x1247F2</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>_M_allocate</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>stl_vector.h</file>
+      <line>378</line>
+    </frame>
+    <frame>
+      <ip>0x1247F2</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>std::vector&lt;libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::spinlock, std::allocator&lt;libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::spinlock&gt; &gt;::_M_default_append(unsigned long)</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>vector.tcc</file>
+      <line>650</line>
+    </frame>
+    <frame>
+      <ip>0x124CE4</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>resize</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>stl_vector.h</file>
+      <line>1011</line>
+    </frame>
+    <frame>
+      <ip>0x124CE4</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::cuckoohash_map(unsigned long, std::hash&lt;unsigned long&gt; const&amp;, std::equal_to&lt;unsigned long&gt; const&amp;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt; const&amp;)</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>114</line>
+    </frame>
+    <frame>
+      <ip>0x124DB3</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>CuckooInterface&lt;unsigned long, unsigned long&gt;::init()</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark/./competitors/Cuckoo</dir>
+      <file>CuckooMapInterface.h</file>
+      <line>31</line>
+    </frame>
+    <frame>
+      <ip>0x117B28</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>106</line>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: possible</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>_M_allocate</fun> </sframe>
+    <sframe> <fun>_ZNSt6vectorIN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE8spinlockESaISB_EE17_M_default_appendEm</fun> </sframe>
+    <sframe> <fun>resize</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE4initEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   fun:allocate
+   fun:allocate
+   fun:_M_allocate
+   fun:_ZNSt6vectorIN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE8spinlockESaISB_EE17_M_default_appendEm
+   fun:resize
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_
+   fun:_ZN15CuckooInterfaceImmE4initEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: possible</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>_M_allocate</fun> </sframe>
+    <sframe> <fun>_ZNSt6vectorIN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE8spinlockESaISB_EE17_M_default_appendEm</fun> </sframe>
+    <sframe> <fun>resize</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE4initEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   fun:allocate
+   fun:allocate
+   fun:_M_allocate
+   fun:_ZNSt6vectorIN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE8spinlockESaISB_EE17_M_default_appendEm
+   fun:resize
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EEC1EmRKS2_RKS4_RKS8_
+   fun:_ZN15CuckooInterfaceImmE4initEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<error>
+  <unique>0x6</unique>
+  <tid>1</tid>
+  <kind>Leak_PossiblyLost</kind>
+  <xwhat>
+    <text>301,989,888 bytes in 1 blocks are possibly lost in loss record 7 of 7</text>
+    <leakedbytes>301989888</leakedbytes>
+    <leakedblocks>1</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x4841F2F</ip>
+      <obj>/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+      <dir>./coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>422</line>
+    </frame>
+    <frame>
+      <ip>0x1289DA</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>allocate</fn>
+      <dir>/usr/include/c++/12/bits</dir>
+      <file>new_allocator.h</file>
+      <line>137</line>
+    </frame>
+    <frame>
+      <ip>0x1289DA</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>bucket_container</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>bucket_container.hh</file>
+      <line>112</line>
+    </frame>
+    <frame>
+      <ip>0x1289DA</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::cuckoo_status libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::cuckoo_fast_double&lt;std::integral_constant&lt;bool, false&gt;, std::integral_constant&lt;bool, true&gt; &gt;(unsigned long)</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>1744</line>
+    </frame>
+    <frame>
+      <ip>0x12B1C4</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::table_position libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::cuckoo_insert_loop&lt;std::integral_constant&lt;bool, false&gt;, unsigned long&gt;(libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::hash_value, libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::TwoBuckets&amp;, unsigned long&amp;)</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>1220</line>
+    </frame>
+    <frame>
+      <ip>0x12B52A</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>bool libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::uprase_fn&lt;unsigned long&amp;, libcuckoo::internal::UpsertToUpraseFn&lt;libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::insert&lt;unsigned long&amp;, unsigned long&amp;&gt;(unsigned long&amp;, unsigned long&amp;)::{lambda(unsigned long&amp;)#1}, unsigned long, false&gt;, unsigned long&amp;&gt;(unsigned long&amp;, libcuckoo::internal::UpsertToUpraseFn&lt;libcuckoo::cuckoohash_map&lt;unsigned long, unsigned long, std::hash&lt;unsigned long&gt;, std::equal_to&lt;unsigned long&gt;, std::allocator&lt;std::pair&lt;unsigned long const, unsigned long&gt; &gt;, 4ul&gt;::insert&lt;unsigned long&amp;, unsigned long&amp;&gt;(unsigned long&amp;, unsigned long&amp;)::{lambda(unsigned long&amp;)#1}, unsigned long, false&gt;, unsigned long&amp;)</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>556</line>
+    </frame>
+    <frame>
+      <ip>0x12B717</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>upsert&lt;long unsigned int&amp;, libcuckoo::cuckoohash_map&lt;long unsigned int, long unsigned int, std::hash&lt;long unsigned int&gt;, std::equal_to&lt;long unsigned int&gt;, std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt;, 4&gt;::insert&lt;long unsigned int&amp;, long unsigned int&amp;&gt;(long unsigned int&amp;, long unsigned int&amp;)::&lt;lambda(libcuckoo::cuckoohash_map&lt;long unsigned int, long unsigned int, std::hash&lt;long unsigned int&gt;, std::equal_to&lt;long unsigned int&gt;, std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt;, 4&gt;::mapped_type&amp;)&gt;, long unsigned int&amp;&gt;</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>586</line>
+    </frame>
+    <frame>
+      <ip>0x12B717</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>insert&lt;long unsigned int&amp;, long unsigned int&amp;&gt;</fn>
+      <dir>/usr/local/include/libcuckoo</dir>
+      <file>cuckoohash_map.hh</file>
+      <line>644</line>
+    </frame>
+    <frame>
+      <ip>0x12B717</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>CuckooInterface&lt;unsigned long, unsigned long&gt;::insert(unsigned long, unsigned long)</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark/./competitors/Cuckoo</dir>
+      <file>CuckooMapInterface.h</file>
+      <line>48</line>
+    </frame>
+    <frame>
+      <ip>0x1169D4</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main._omp_fn.0</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x48DD0B5</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0</obj>
+      <fn>GOMP_parallel</fn>
+    </frame>
+    <frame>
+      <ip>0x117D51</ip>
+      <obj>/data00/home/wangmingze.886/test_bishe/sharehash-learn/cmake-build-debug-/benchmark</obj>
+      <fn>main</fn>
+      <dir>/data00/home/wangmingze.886/test_bishe/sharehash-learn/benchmark</dir>
+      <file>benchmark.cpp</file>
+      <line>126</line>
+    </frame>
+  </stack>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: possible</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>bucket_container</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_fast_doubleISt17integral_constantIbLb0EESB_IbLb1EEEENS9_13cuckoo_statusEm</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_insert_loopISt17integral_constantIbLb0EEmEENS9_14table_positionENS9_10hash_valueERNS9_10TwoBucketsERT0_</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE9uprase_fnIRmNS_8internal16UpsertToUpraseFnIZNS9_6insertISB_JSB_EEEbOT_DpOT0_EUlSB_E_mLb0EEEJSB_EEEbSG_T0_DpOT1_</fun> </sframe>
+    <sframe> <fun>upsert&lt;long unsigned int&amp;, libcuckoo::cuckoohash_map&lt;long unsigned int, long unsigned int, std::hash&lt;long unsigned int&gt;, std::equal_to&lt;long unsigned int&gt;, std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt;, 4&gt;::insert&lt;long unsigned int&amp;, long unsigned int&amp;&gt;(long unsigned int&amp;, long unsigned int&amp;)::&lt;lambda(libcuckoo::cuckoohash_map&lt;long unsigned int, long unsigned int, std::hash&lt;long unsigned int&gt;, std::equal_to&lt;long unsigned int&gt;, std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt;, 4&gt;::mapped_type&amp;)&gt;, long unsigned int&amp;&gt;</fun> </sframe>
+    <sframe> <fun>insert&lt;long unsigned int&amp;, long unsigned int&amp;&gt;</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE6insertEmm</fun> </sframe>
+    <sframe> <fun>main._omp_fn.0</fun> </sframe>
+    <sframe> <fun>GOMP_parallel</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   fun:allocate
+   fun:bucket_container
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_fast_doubleISt17integral_constantIbLb0EESB_IbLb1EEEENS9_13cuckoo_statusEm
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_insert_loopISt17integral_constantIbLb0EEmEENS9_14table_positionENS9_10hash_valueERNS9_10TwoBucketsERT0_
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE9uprase_fnIRmNS_8internal16UpsertToUpraseFnIZNS9_6insertISB_JSB_EEEbOT_DpOT0_EUlSB_E_mLb0EEEJSB_EEEbSG_T0_DpOT1_
+   fun:upsert<long unsigned int&, libcuckoo::cuckoohash_map<long unsigned int, long unsigned int, std::hash<long unsigned int>, std::equal_to<long unsigned int>, std::allocator<std::pair<long unsigned int const, long unsigned int> >, 4>::insert<long unsigned int&, long unsigned int&>(long unsigned int&, long unsigned int&)::<lambda(libcuckoo::cuckoohash_map<long unsigned int, long unsigned int, std::hash<long unsigned int>, std::equal_to<long unsigned int>, std::allocator<std::pair<long unsigned int const, long unsigned int> >, 4>::mapped_type&)>, long unsigned int&>
+   fun:insert<long unsigned int&, long unsigned int&>
+   fun:_ZN15CuckooInterfaceImmE6insertEmm
+   fun:main._omp_fn.0
+   fun:GOMP_parallel
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Leak</skind>
+    <skaux>match-leak-kinds: possible</skaux>
+    <sframe> <fun>_Znwm</fun> </sframe>
+    <sframe> <fun>allocate</fun> </sframe>
+    <sframe> <fun>bucket_container</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_fast_doubleISt17integral_constantIbLb0EESB_IbLb1EEEENS9_13cuckoo_statusEm</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_insert_loopISt17integral_constantIbLb0EEmEENS9_14table_positionENS9_10hash_valueERNS9_10TwoBucketsERT0_</fun> </sframe>
+    <sframe> <fun>_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE9uprase_fnIRmNS_8internal16UpsertToUpraseFnIZNS9_6insertISB_JSB_EEEbOT_DpOT0_EUlSB_E_mLb0EEEJSB_EEEbSG_T0_DpOT1_</fun> </sframe>
+    <sframe> <fun>upsert&lt;long unsigned int&amp;, libcuckoo::cuckoohash_map&lt;long unsigned int, long unsigned int, std::hash&lt;long unsigned int&gt;, std::equal_to&lt;long unsigned int&gt;, std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt;, 4&gt;::insert&lt;long unsigned int&amp;, long unsigned int&amp;&gt;(long unsigned int&amp;, long unsigned int&amp;)::&lt;lambda(libcuckoo::cuckoohash_map&lt;long unsigned int, long unsigned int, std::hash&lt;long unsigned int&gt;, std::equal_to&lt;long unsigned int&gt;, std::allocator&lt;std::pair&lt;long unsigned int const, long unsigned int&gt; &gt;, 4&gt;::mapped_type&amp;)&gt;, long unsigned int&amp;&gt;</fun> </sframe>
+    <sframe> <fun>insert&lt;long unsigned int&amp;, long unsigned int&amp;&gt;</fun> </sframe>
+    <sframe> <fun>_ZN15CuckooInterfaceImmE6insertEmm</fun> </sframe>
+    <sframe> <fun>main._omp_fn.0</fun> </sframe>
+    <sframe> <fun>GOMP_parallel</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   fun:allocate
+   fun:bucket_container
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_fast_doubleISt17integral_constantIbLb0EESB_IbLb1EEEENS9_13cuckoo_statusEm
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE18cuckoo_insert_loopISt17integral_constantIbLb0EEmEENS9_14table_positionENS9_10hash_valueERNS9_10TwoBucketsERT0_
+   fun:_ZN9libcuckoo14cuckoohash_mapImmSt4hashImESt8equal_toImESaISt4pairIKmmEELm4EE9uprase_fnIRmNS_8internal16UpsertToUpraseFnIZNS9_6insertISB_JSB_EEEbOT_DpOT0_EUlSB_E_mLb0EEEJSB_EEEbSG_T0_DpOT1_
+   fun:upsert<long unsigned int&, libcuckoo::cuckoohash_map<long unsigned int, long unsigned int, std::hash<long unsigned int>, std::equal_to<long unsigned int>, std::allocator<std::pair<long unsigned int const, long unsigned int> >, 4>::insert<long unsigned int&, long unsigned int&>(long unsigned int&, long unsigned int&)::<lambda(libcuckoo::cuckoohash_map<long unsigned int, long unsigned int, std::hash<long unsigned int>, std::equal_to<long unsigned int>, std::allocator<std::pair<long unsigned int const, long unsigned int> >, 4>::mapped_type&)>, long unsigned int&>
+   fun:insert<long unsigned int&, long unsigned int&>
+   fun:_ZN15CuckooInterfaceImmE6insertEmm
+   fun:main._omp_fn.0
+   fun:GOMP_parallel
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<errorcounts>
+</errorcounts>
+
+<suppcounts>
+</suppcounts>
+
+</valgrindoutput>
+
+

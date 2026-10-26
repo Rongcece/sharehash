@@ -1,0 +1,114 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug benchmark",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/benchmark",
+            "args": ["-t", "sharehash", "-d", "10000"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "禁用内联函数调试",
+                    "text": "set skip-inline-functions on",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "设置调试模式不进入标准库",
+                    "text": "set step-mode on",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "设置不调试标准库代码",
+                    "text": "set skip-solib-deps on",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "禁用进入没有调试信息的函数",
+                    "text": "set step-mode skip",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过特定的atomic_base.h文件",
+                    "text": "skip -file /usr/include/c++/12/bits/atomic_base.h",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过所有atomic_base.h文件",
+                    "text": "skip -gfi *atomic_base.h",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过所有C++标准库文件",
+                    "text": "skip -gfi /usr/include/c++/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过所有系统include目录",
+                    "text": "skip -gfi /usr/include/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过bits目录下的文件",
+                    "text": "skip -gfi */bits/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过atomic相关文件",
+                    "text": "skip -gfi *atomic*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过std::atomic相关函数",
+                    "text": "skip -rfunction ^std::.*atomic.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过std命名空间的所有函数",
+                    "text": "skip -rfunction ^std::.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过__atomic开头的函数",
+                    "text": "skip -rfunction ^__atomic.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过__gnu_cxx命名空间的函数",
+                    "text": "skip -rfunction ^__gnu_cxx::.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过所有原子操作函数",
+                    "text": "skip -rfunction .*exchange.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过所有load函数",
+                    "text": "skip -rfunction .*load.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过所有store函数",
+                    "text": "skip -rfunction .*store.*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "跳过Boost库文件",
+                    "text": "skip -gfi */boost/*",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
