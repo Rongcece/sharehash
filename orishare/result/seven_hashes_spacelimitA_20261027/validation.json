@@ -1,0 +1,56 @@
+{
+  "checked_utc": "2026-10-27T06:30:42+00:00",
+  "status": "passed",
+  "scope": "Artifact integrity and consistency. Nine partial V2-A workloads and nine MapEmbed aborts remain failed benchmark jobs.",
+  "expected_jobs": 63,
+  "observed_jobs": 63,
+  "passed_jobs": 45,
+  "failed_jobs": 18,
+  "passed_by_hashmap": {
+    "sharehash": 9,
+    "sharehash_subtable": 9,
+    "unorderedmap": 9,
+    "cuckoohash": 9,
+    "sparsehash": 9
+  },
+  "failed_by_hashmap": {
+    "sharehash_spacelimitA": 9,
+    "mapembed": 9
+  },
+  "primary_csv_row_counts": {
+    "benchmark_results.csv": 54,
+    "memory_results.csv": 60,
+    "summary.csv": 21,
+    "memory_summary.csv": 21,
+    "space_budget_results.csv": 9
+  },
+  "all_source_binary_flags_and_csv_hashes_verified": true,
+  "source_file_count": 25,
+  "unchanged_sharehash_algorithm_headers": {
+    "include/ShareHash.h": "9d4508ca98816a566521a4186c75dbcebaa35c81723d3f2cabfe697f5c49fe85",
+    "include/ShareHash_subtable.h": "9c14b2f5686ed3ff02f6b2f76ab75bb8d82ae66d8cc31647de50cfaf06d091f1",
+    "include/ShareHash_subtable_spacelimitA.h": "029f52a8b07a45a8cb81dc2f6e12f659ca2d4845fa4f51a3808525cf3391ec55"
+  },
+  "all_job_commands_inputs_and_embedded_rows_verified": true,
+  "all_raw_memory_and_five_bpk_formulas_verified": true,
+  "lock_deductions_verified": true,
+  "all_standard_summary_medians_counts_and_pass_counts_verified": true,
+  "valid_only_uses_status_passed": true,
+  "budget_validations_passed": 9,
+  "spacelimitA_full_dataset_passed": 0,
+  "physical_cap_policy": "size_t max; no finite external physical cap configured",
+  "spacelimitA_lock_objects": "slot capacity + 32 subtable locks + 1 budget lock",
+  "rss_and_timing_are_actual_including_lock_execution": true,
+  "artifact_sha256": {
+    "RESULTS.md": "7755b57dec151153ad6e9f388ec79ca824e3d8f3131b30866d422a08d34531d0",
+    "benchmark_results.csv": "ee492efb4c27e345fdd3caf516dfce3b82d66d82f10766a126816d13f12577ef",
+    "memory_results.csv": "22421a1182a2c543c4b79a80a2980baec1fb95bfd0f563509343e0a424e9711c",
+    "memory_summary.csv": "e07763e8a769645fe739f8756a8cde37189f062210ca3abbb1b696db239f3c88",
+    "sharehash_matched_comparison.csv": "6cf367bbb8043b483f49d3a57a68bdd0f5f538974e6d04f5acb5a6381bb99c2d",
+    "space_budget_results.csv": "ce86f94b6e432a46e7af1abe61cff6de01595c3ec11e478f13797f725e11c5f3",
+    "space_budget_summary.csv": "73b7e6b4ac0d53ecbfc42dc35cc749f30ba42d00c0f69828fb35ae86dfd699fc",
+    "summary.csv": "cedfbc22da74fff3f2eda5188ed1261d4eeafe34e4e840c7868213bdd228004e",
+    "valid_only_memory_summary.csv": "cfdb9ab8f28cabc95d5e3496c873817a0bb72d38cb6f11b018554eb56aae50e4",
+    "valid_only_summary.csv": "6106be7d4d10fa67345fd1bf2209d6d39b3cb1f07fb53e6c077744a46665c248"
+  }
+}

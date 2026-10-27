@@ -9,8 +9,10 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
   /home/wmz/sharehash/orishare/benchmark/competitors/MapEmbed/src/MapEmbed.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/MapEmbed/MapEmbedInterface.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/MapInterface.h \
+  /home/wmz/sharehash/orishare/benchmark/ResultWriter.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/MapInterface.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/ShareHash/ShareHashInterface.h \
+  /home/wmz/sharehash/orishare/benchmark/competitors/ShareHash/ShareHashPagePoolInterface.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/ShareHash/ShareHashSubtableInterface.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/MapInterface.h \
   /home/wmz/sharehash/orishare/benchmark/competitors/SparseHash/SparseHash.h \
@@ -18,6 +20,7 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
   /home/wmz/sharehash/orishare/benchmark/competitors/UnorderedMap/UnorderedMapInterface.h \
   /home/wmz/sharehash/orishare/benchmark/ResultWriter.h \
   /home/wmz/sharehash/orishare/include/ShareHash.h \
+  /home/wmz/sharehash/orishare/include/ShareHash_pagepool.h \
   /home/wmz/sharehash/orishare/include/ShareHash_subtable.h \
   /home/wmz/sharehash/orishare/include/concurrency.h \
   /home/wmz/sharehash/orishare/include/murmur3.h \
@@ -2003,6 +2006,8 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/c++/11/bits/ios_base.h:
 
+/usr/include/c++/11/bits/hashtable_policy.h:
+
 /usr/include/c++/11/numeric:
 
 /usr/include/boost/mpl/aux_/config/dependent_nttp.hpp:
@@ -2136,12 +2141,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/boost/mpl/iter_fold_if.hpp:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp:
-
-/usr/include/boost/mpl/iter_fold.hpp:
-
-/usr/include/boost/mpl/vector/aux_/preprocessed/typeof_based/vector20.hpp:
-
-/usr/include/boost/predef/compiler/digitalmars.h:
 
 /usr/include/boost/mpl/integral_c_tag.hpp:
 
@@ -2284,6 +2283,8 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/libintl.h:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/greater.hpp:
+
+/home/wmz/sharehash/orishare/include/ShareHash_pagepool.h:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/fold_impl.hpp:
 
@@ -2451,8 +2452,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/mpl/aux_/adl_barrier.hpp:
 
-/usr/include/boost/mpl/aux_/msvc_type.hpp:
-
 /usr/include/boost/integer_traits.hpp:
 
 /usr/include/boost/mpl/arg_fwd.hpp:
@@ -2563,6 +2562,8 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/type_traits/remove_pointer.hpp:
 
+/usr/include/boost/iterator/reverse_iterator.hpp:
+
 /usr/include/c++/11/bits/streambuf.tcc:
 
 /usr/include/boost/mpl/O1_size.hpp:
@@ -2623,10 +2624,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/predef/compiler/visualc.h:
 
-/usr/include/boost/mpl/vector/aux_/iterator.hpp:
-
-/usr/include/boost/lexical_cast.hpp:
-
 /usr/include/boost/none_t.hpp:
 
 /usr/include/boost/date_time/date_defs.hpp:
@@ -2672,22 +2669,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/boost/mpl/aux_/msvc_never_true.hpp:
 
 /usr/include/boost/predef/library/c.h:
-
-/usr/include/boost/mpl/aux_/config/compiler.hpp:
-
-/usr/include/boost/math/tools/config.hpp:
-
-/usr/include/boost/date_time/posix_time/time_period.hpp:
-
-/usr/include/boost/concept/detail/general.hpp:
-
-/usr/include/boost/predef/os/irix.h:
-
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-
-/usr/include/boost/numeric/conversion/converter_policies.hpp:
-
-/usr/include/boost/type_traits/is_union.hpp:
 
 /usr/include/boost/mpl/vector/aux_/O1_size.hpp:
 
@@ -2736,10 +2717,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /home/wmz/sharehash/orishare/benchmark/benchmark.cpp:
 
 /usr/include/boost/bind/bind.hpp:
-
-/usr/include/boost/mpl/sequence_tag_fwd.hpp:
-
-/usr/include/boost/predef/os/haiku.h:
 
 /usr/include/boost/mpl/aux_/na.hpp:
 
@@ -2829,6 +2806,24 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/type_traits/remove_bounds.hpp:
 
+/usr/include/boost/math/special_functions/detail/round_fwd.hpp:
+
+/usr/include/boost/date_time/posix_time/posix_time_config.hpp:
+
+/usr/include/boost/date_time/posix_time/posix_time_types.hpp:
+
+/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/boost/move/detail/config_end.hpp:
+
+/usr/include/boost/smart_ptr/detail/spinlock.hpp:
+
+/usr/include/boost/iterator/distance.hpp:
+
+/usr/include/boost/predef/platform/windows_desktop.h:
+
 /usr/include/boost/mpl/limits/vector.hpp:
 
 /usr/include/boost/date_time/gregorian/greg_weekday.hpp:
@@ -2856,6 +2851,26 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/boost/date_time/gregorian/greg_day.hpp:
 
 /usr/include/boost/date_time/time_system_counted.hpp:
+
+/usr/include/boost/mpl/aux_/config/compiler.hpp:
+
+/usr/include/boost/math/tools/config.hpp:
+
+/usr/include/boost/date_time/posix_time/time_period.hpp:
+
+/usr/include/boost/concept/detail/general.hpp:
+
+/usr/include/boost/predef/os/irix.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/usr/include/boost/numeric/conversion/converter_policies.hpp:
+
+/usr/include/boost/type_traits/is_union.hpp:
+
+/usr/include/boost/mpl/aux_/msvc_type.hpp:
+
+/home/wmz/sharehash/orishare/benchmark/competitors/ShareHash/ShareHashPagePoolInterface.h:
 
 /usr/include/boost/range/detail/sfinae.hpp:
 
@@ -2921,6 +2936,38 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/preprocessor/slot/detail/def.hpp:
 
+/usr/include/boost/mpl/vector/aux_/iterator.hpp:
+
+/usr/include/boost/lexical_cast.hpp:
+
+/usr/include/boost/predef/os/haiku.h:
+
+/usr/include/boost/mpl/sequence_tag_fwd.hpp:
+
+/usr/include/boost/mpl/iter_fold.hpp:
+
+/usr/include/boost/mpl/vector/aux_/preprocessed/typeof_based/vector20.hpp:
+
+/usr/include/boost/predef/compiler/digitalmars.h:
+
+/usr/include/boost/mpl/aux_/largest_int.hpp:
+
+/usr/include/boost/preprocessor/control/iif.hpp:
+
+/usr/include/c++/11/bits/enable_special_members.h:
+
+/usr/include/boost/config/no_tr1/memory.hpp:
+
+/usr/include/boost/thread/xtime.hpp:
+
+/usr/include/boost/iterator/detail/config_def.hpp:
+
+/usr/include/boost/config/user.hpp:
+
+/usr/include/boost/predef/hardware/simd/arm/versions.h:
+
+/usr/include/boost/date_time/date_duration.hpp:
+
 /usr/include/boost/predef/architecture/sparc.h:
 
 /usr/include/boost/container_hash/hash.hpp:
@@ -2939,13 +2986,11 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/predef/library.h:
 
-/home/wmz/sharehash/orishare/benchmark/competitors/MapInterface.h:
+/usr/include/boost/atomic/detail/type_traits/is_iec559.hpp:
 
-/usr/include/boost/checked_delete.hpp:
+/usr/include/boost/exception/current_exception_cast.hpp:
 
-/usr/include/boost/type_traits/is_same.hpp:
-
-/usr/include/boost/date_time/int_adapter.hpp:
+/usr/include/boost/exception/to_string_stub.hpp:
 
 /usr/include/c++/11/cstdlib:
 
@@ -2993,15 +3038,13 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/function/detail/prologue.hpp:
 
+/usr/include/boost/atomic/detail/operations_fwd.hpp:
+
+/usr/include/boost/move/detail/meta_utils.hpp:
+
 /home/wmz/sharehash/orishare/benchmark/competitors/MapEmbed/src/murmur.h:
 
 /usr/include/boost/atomic/detail/extra_operations.hpp:
-
-/usr/include/boost/atomic/detail/type_traits/is_iec559.hpp:
-
-/usr/include/boost/exception/current_exception_cast.hpp:
-
-/usr/include/boost/exception/to_string_stub.hpp:
 
 /home/wmz/sharehash/orishare/benchmark/competitors/UnorderedMap/UnorderedMapInterface.h:
 
@@ -3033,15 +3076,15 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/thread/detail/variadic_header.hpp:
 
+/usr/include/boost/atomic/capabilities.hpp:
+
+/usr/include/boost/atomic/detail/atomic_flag.hpp:
+
 /usr/include/boost/container_hash/detail/limits.hpp:
 
 /usr/include/boost/atomic/detail/type_traits/is_floating_point.hpp:
 
 /usr/include/boost/detail/lcast_precision.hpp:
-
-/usr/include/boost/atomic/capabilities.hpp:
-
-/usr/include/boost/atomic/detail/atomic_flag.hpp:
 
 /usr/include/boost/mpl/aux_/numeric_op.hpp:
 
@@ -3063,7 +3106,15 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/mpl/aux_/fold_impl.hpp:
 
+/usr/include/c++/11/bits/invoke.h:
+
+/usr/include/boost/predef/architecture/z.h:
+
 /usr/include/boost/atomic/detail/fp_operations_fwd.hpp:
+
+/usr/include/boost/atomic/detail/operations_lockfree.hpp:
+
+/usr/include/boost/predef/library/std/roguewave.h:
 
 /usr/include/boost/iterator/detail/enable_if.hpp:
 
@@ -3077,33 +3128,11 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/atomic/detail/extra_ops_emulated.hpp:
 
-/usr/include/boost/config/no_tr1/memory.hpp:
-
-/usr/include/boost/thread/xtime.hpp:
-
 /usr/include/c++/11/fstream:
 
 /home/wmz/sharehash/orishare/benchmark/ResultWriter.h:
 
-/usr/include/boost/date_time/posix_time/posix_time_config.hpp:
-
-/usr/include/boost/math/special_functions/detail/round_fwd.hpp:
-
 /usr/include/boost/type_traits/detail/is_function_cxx_11.hpp:
-
-/usr/include/boost/mpl/aux_/largest_int.hpp:
-
-/usr/include/boost/preprocessor/control/iif.hpp:
-
-/usr/include/c++/11/bits/enable_special_members.h:
-
-/usr/include/boost/iterator/detail/config_def.hpp:
-
-/usr/include/boost/config/user.hpp:
-
-/usr/include/boost/predef/hardware/simd/arm/versions.h:
-
-/usr/include/boost/date_time/date_duration.hpp:
 
 /usr/include/boost/lexical_cast/detail/inf_nan.hpp:
 
@@ -3129,6 +3158,10 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/iterator/iterator_adaptor.hpp:
 
+/usr/include/boost/atomic/atomic_flag.hpp:
+
+/usr/include/boost/static_assert.hpp:
+
 /usr/include/c++/11/bits/ostream_insert.h:
 
 /usr/include/boost/mpl/push_back_fwd.hpp:
@@ -3145,31 +3178,13 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/preprocessor/facilities/intercept.hpp:
 
-/usr/include/boost/atomic/atomic_flag.hpp:
+/home/wmz/sharehash/orishare/benchmark/competitors/MapInterface.h:
 
-/usr/include/boost/static_assert.hpp:
+/usr/include/boost/checked_delete.hpp:
 
-/usr/include/boost/atomic/detail/operations_fwd.hpp:
+/usr/include/boost/type_traits/is_same.hpp:
 
-/usr/include/boost/move/detail/meta_utils.hpp:
-
-/usr/include/boost/date_time/posix_time/posix_time_types.hpp:
-
-/usr/include/boost/predef/library/std/roguewave.h:
-
-/usr/include/boost/atomic/detail/operations_lockfree.hpp:
-
-/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/boost/move/detail/config_end.hpp:
-
-/usr/include/boost/smart_ptr/detail/spinlock.hpp:
-
-/usr/include/boost/iterator/distance.hpp:
-
-/usr/include/boost/predef/platform/windows_desktop.h:
+/usr/include/boost/date_time/int_adapter.hpp:
 
 /usr/include/boost/tuple/tuple.hpp:
 
@@ -3379,12 +3394,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/type_traits/enable_if.hpp:
 
-/usr/include/boost/mpl/next.hpp:
-
-/usr/include/boost/mpl/vector/aux_/push_back.hpp:
-
-/usr/include/boost/atomic/atomic.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/11/include/pconfigintrin.h:
 
 /usr/include/boost/atomic/detail/extra_fp_operations.hpp:
@@ -3541,7 +3550,11 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/iterator/iterator_traits.hpp:
 
-/usr/include/boost/iterator/reverse_iterator.hpp:
+/usr/include/boost/mpl/next.hpp:
+
+/usr/include/boost/atomic/atomic.hpp:
+
+/usr/include/boost/mpl/vector/aux_/push_back.hpp:
 
 /usr/include/boost/mpl/vector/aux_/size.hpp:
 
@@ -3734,6 +3747,10 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/boost/predef/compiler/ekopath.h:
 
 /usr/include/boost/preprocessor/list/reverse.hpp:
+
+/usr/include/boost/type_traits/is_assignable.hpp:
+
+/usr/include/boost/predef/compiler/gcc.h:
 
 /usr/include/boost/type_traits/conditional.hpp:
 
@@ -4381,10 +4398,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 
 /usr/include/boost/type_traits/is_array.hpp:
 
-/usr/include/boost/predef/compiler/gcc.h:
-
-/usr/include/boost/type_traits/is_assignable.hpp:
-
 /usr/include/boost/type_traits/is_base_and_derived.hpp:
 
 /usr/include/boost/type_traits/is_bounded_array.hpp:
@@ -4402,8 +4415,6 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/boost/type_traits/add_rvalue_reference.hpp:
 
 /usr/include/boost/type_traits/is_destructible.hpp:
-
-/usr/include/c++/11/bits/hashtable_policy.h:
 
 /usr/include/boost/type_traits/detail/config.hpp:
 
@@ -4506,7 +4517,3 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: /home/wmz/sharehash/orishare
 /usr/include/c++/11/bits/exception_defines.h:
 
 /usr/include/c++/11/bits/hash_bytes.h:
-
-/usr/include/boost/predef/architecture/z.h:
-
-/usr/include/c++/11/bits/invoke.h:

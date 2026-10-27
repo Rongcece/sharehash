@@ -1,0 +1,11 @@
+Hashmap type: sharehash_pagepool
+Dataset size: 5000000
+Thread number: 1
+Hashmap insert throughput: 1.90872e+06 elements/second
+Hashmap read throughput: 19933.7 elements/second
+Space consumption: 159959568bytes
+Index BPK (reported bytes/key): 31.9919
+Lock object bytes excluded from adjusted metrics: 6252065
+Index BPK (reported, excluding lock object bytes): 30.7415
+Successful inserts: 5000000, lookup hits: 5000000
+Results saved to: /home/wmz/sharehash/orishare/result/six_hashes_pagepool_20261027/benchmark_results.csv

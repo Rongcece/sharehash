@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "regression_cases": [
+    "PASS growth_values_addresses_remove_reset",
+    "PASS collisions_and_duplicates",
+    "PASS cached_hash_splits",
+    "PASS affine_rejection_and_reset_peak",
+    "PASS allocation_failure_rollback",
+    "PASS failed_reset_preserves_storage",
+    "PASS radix_directory_boundaries",
+    "PASS finite_cap_and_invalid_config",
+    "PASS concurrent_access"
+  ],
+  "asan_ubsan": "passed with detect_leaks=0",
+  "leaksanitizer": "unavailable: ptrace restriction",
+  "requested_allocation_ledger": "matched with zero outstanding index allocations after every test",
+  "focused_jobs": 18,
+  "focused_all_values_valid": true,
+  "source_sha256_verified": {
+    "include/ShareHash_pagepoolB.h": "1608d768716f26103b525ec5046d1435976e39665131a7def7cab1a872ad9b6b",
+    "include/ShareHash_subtable.h": "9c14b2f5686ed3ff02f6b2f76ab75bb8d82ae66d8cc31647de50cfaf06d091f1",
+    "benchmark/pagepoolB_benchmark.cpp": "9ecbeed145b7b9b8737ea204fe89b65122f71f30721a39af7259df1216e0fa1c"
+  },
+  "focused_csv_sha256": "feb34a1d4718063c0c1a7dbf042931dc277f452959328ff5ebe6db5c9ca5c5df"
+}

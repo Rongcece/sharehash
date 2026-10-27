@@ -15,6 +15,7 @@
 #include "./competitors/MapEmbed/MapEmbedInterface.h"
 #include "./competitors/ShareHash/ShareHashInterface.h"
 #include "./competitors/ShareHash/ShareHashSubtableInterface.h"
+#include "./competitors/ShareHash/ShareHashPagePoolInterface.h"
 #include "./competitors/UnorderedMap/UnorderedMapInterface.h"
 #include "./competitors/Cuckoo/CuckooMapInterface.h"
 #include "./competitors/SparseHash/SparseHash.h"
@@ -88,6 +89,10 @@ int main(int argc, char** argv)
         else if (hashmapType == "sharehash_subtable")
         {
             config.hashmap = std::make_unique<ShareHashSubtableInterface<uint64_t, uint64_t>>();
+        }
+        else if (hashmapType == "sharehash_pagepool")
+        {
+            config.hashmap = std::make_unique<ShareHashPagePoolInterface<uint64_t, uint64_t>>();
         }
         else if (hashmapType == "cuckoohash")
         {
@@ -208,6 +213,11 @@ int main(int argc, char** argv)
             lock_memory_after_insert
         };
         benchmark_results::append_memory_csv(vm["result-dir"].as<std::string>(), result);
+        if (hashmapType == "sharehash_pagepool") {
+            static_cast<ShareHashPagePoolInterface<uint64_t, uint64_t>*>(config.hashmap.get())
+                ->save_budget_csv(vm["result-dir"].as<std::string>(), config.datasetNumber,
+                                  config.threadNumber, seed, insert_successes, insert_seconds);
+        }
     } catch (const std::exception& error) {
         std::cerr << "Cannot save insertion memory results: " << error.what() << std::endl;
         return 1;

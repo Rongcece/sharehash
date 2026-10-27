@@ -1,0 +1,11 @@
+Hashmap type: sharehash_spacelimitA
+Dataset size: 100000
+Thread number: 1
+Hashmap insert throughput: 3.49903e+06 elements/second
+Hashmap read throughput: 1.15059e+07 elements/second
+Space consumption: 731612bytes
+Index BPK (reported bytes/key): 7.31612
+Lock object bytes excluded from adjusted metrics: 36265
+Index BPK (reported, excluding lock object bytes): 6.95347
+Successful inserts: 27338, lookup hits: 27338
+Results saved to: /home/wmz/sharehash/orishare/result/seven_hashes_spacelimitA_20261027/benchmark_results.csv

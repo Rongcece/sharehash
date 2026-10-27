@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the six hash benchmarks (including both ShareHash variants) in separate single-thread processes.
+"""Run six hash benchmarks (including three independent ShareHash variants) in separate single-thread processes.
 
 Example (from the project root):
     python3 benchmark/run_single_thread.py --binary build/benchmark
@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-HASHMAPS = ("sharehash", "sharehash_subtable", "unorderedmap", "mapembed", "cuckoohash", "sparsehash")
+HASHMAPS = ("sharehash", "sharehash_subtable", "sharehash_pagepool", "unorderedmap", "cuckoohash", "sparsehash")
 CSV_FIELDS = (
     "timestamp_utc", "hashmap_type", "dataset_size", "thread_count", "seed",
     "insert_successes", "lookup_hits", "insert_seconds", "read_seconds",
@@ -55,6 +55,15 @@ MEMORY_CSV_FIELDS = (
     "heap_bpk_excluding_locks_bytes_per_key",
 )
 MEMORY_METRIC_FIELDS = MEMORY_CSV_FIELDS[6:]
+BUDGET_CSV_FIELDS = (
+    "timestamp_utc", "hashmap_type", "dataset_size", "thread_count", "seed", "insert_successes",
+    "insert_rejections", "insert_seconds", "successful_insert_throughput_ops_s",
+    "insert_acceptance_fraction", "slot_capacity", "subtable_count", "physical_limit_bytes",
+    "a_stable_factor", "a_migration_factor", "additive_bytes", "min_load_factor", "max_load_factor",
+    "current_live_bytes", "peak_live_bytes", "live_keys_main", "live_keys_fallback",
+    "allowed_stable_bytes", "allowed_migration_bytes", "post_insert_load_factor",
+    "lock_memory_bytes", "reported_bpk_per_stored_key_excluding_locks",
+)
 UINT64_MAX = (1 << 64) - 1
 
 
@@ -107,9 +116,9 @@ def validate_lock_accounting(row, hashmap, size):
     errors = []
     try:
         locks = int(row["lock_memory_bytes"])
-        if locks < 0 or (hashmap in ("sharehash", "sharehash_subtable") and locks == 0):
+        if locks < 0 or (hashmap in ("sharehash", "sharehash_subtable", "sharehash_pagepool") and locks == 0):
             errors.append("invalid ShareHash lock-object byte count")
-        if hashmap not in ("sharehash", "sharehash_subtable") and locks != 0:
+        if hashmap not in ("sharehash", "sharehash_subtable", "sharehash_pagepool") and locks != 0:
             errors.append("unexpected lock deduction for another hashmap")
         for source, adjusted, bpk in (
             ("reported_memory_bytes", "reported_memory_excluding_locks_bytes", "reported_bpk_excluding_locks_bytes_per_key"),
@@ -189,6 +198,78 @@ def validate_memory_row(row, hashmap, size, seed):
             pass
     errors.extend(validate_lock_accounting(row, hashmap, size))
     return errors
+
+
+def validate_budget_row(row, job):
+    errors = []
+    try:
+        n = job["dataset_size"]
+        for field, expected in (("hashmap_type", "sharehash_pagepool"), ("dataset_size", str(n)),
+                                ("thread_count", "1"), ("seed", str(job["seed"]))):
+            if row[field] != expected:
+                errors.append("unexpected budget " + field)
+        if any(not math.isfinite(float(row[field])) for field in BUDGET_CSV_FIELDS[2:]):
+            errors.append("nonfinite budget numeric field")
+        actual = int(row["live_keys_main"])
+        current = int(row["current_live_bytes"])
+        peak = int(row["peak_live_bytes"])
+        limit = int(row["physical_limit_bytes"])
+        locks = int(row["lock_memory_bytes"])
+        slots = int(row["slot_capacity"])
+        if actual != int(row["insert_successes"]) or int(row["insert_rejections"]) != n - actual:
+            errors.append("budget success/rejection accounting mismatch")
+        if int(row["live_keys_fallback"]) != 0 or int(row["subtable_count"]) != 32:
+            errors.append("unexpected V2-A fallback or subtable count")
+        if not (0 <= current <= peak <= limit):
+            errors.append("V2-A peak exceeds physical storage-byte limit")
+        for factor, recorded, measured in (("a_stable_factor", "allowed_stable_bytes", current),
+                                            ("a_migration_factor", "allowed_migration_bytes", peak)):
+            allowed = min(limit, int(float(row[factor]) * actual) + int(row["additive_bytes"]))
+            if int(row[recorded]) != allowed or measured > allowed:
+                errors.append("V2-A affine budget mismatch: " + factor)
+        memory = job.get("memory_csv_row", {})
+        if (actual != int(memory.get("insert_successes", -1))
+                or current != int(memory.get("reported_memory_bytes", -1))
+                or locks != int(memory.get("lock_memory_bytes", -1))):
+            errors.append("budget diagnostics disagree with insertion snapshot")
+        expected = {
+            "successful_insert_throughput_ops_s": actual / float(row["insert_seconds"]),
+            "insert_acceptance_fraction": actual / n,
+            "post_insert_load_factor": actual / slots,
+            "reported_bpk_per_stored_key_excluding_locks": (current - locks) / actual if actual else 0,
+        }
+        for field, value in expected.items():
+            if not math.isclose(float(row[field]), value, rel_tol=1e-12, abs_tol=1e-12):
+                errors.append("budget ratio mismatch: " + field)
+    except (ValueError, TypeError, KeyError, ZeroDivisionError):
+        errors.append("invalid budget diagnostics fields")
+    return errors
+
+
+def attach_budget_diagnostics(path, jobs):
+    targets = [job for job in jobs if job["hashmap_type"] == "sharehash_pagepool"]
+    try:
+        rows = read_results(path, BUDGET_CSV_FIELDS)
+        global_errors = [] if len(rows) == len(targets) else ["unexpected budget CSV row count"]
+    except (OSError, ValueError, csv.Error) as error:
+        rows, global_errors = [], ["invalid budget CSV: " + str(error)]
+    for job in targets:
+        matches = [(i, row) for i, row in enumerate(rows, 1)
+                   if row["dataset_size"] == str(job["dataset_size"]) and row["seed"] == str(job["seed"])
+                   and row["hashmap_type"] == job["hashmap_type"]]
+        errors = list(global_errors)
+        if len(matches) != 1:
+            errors.append("expected exactly one budget diagnostic row")
+        else:
+            number, row = matches[0]
+            job["budget_csv_row"] = row
+            job["budget_csv_row_number"] = number
+            errors.extend(validate_budget_row(row, job))
+        job["budget_validation_errors"] = errors
+        if errors:
+            job["validation_errors"].extend("budget: " + error for error in errors)
+            job["status"] = "failed"
+    return global_errors
 
 
 def machine_information():
@@ -389,15 +470,19 @@ def main():
         "memory_phase": "after_insert", "bpk_unit": "bytes/key",
         "primary_memory_metric": "heap_bpk_excluding_locks_bytes_per_key",
         "lock_accounting": {
-            "policy": "For both ShareHash variants, subtract lock-object bytes from raw reported and estimated heap bytes; retain raw columns for auditing.",
+            "policy": "For all three ShareHash variants, subtract lock-object bytes from raw reported and estimated heap bytes; retain raw columns for auditing.",
             "sharehash": "(slot capacity + 1 table lock) * sizeof(SpinLock)",
             "sharehash_subtable": "(total slot capacity + T table locks) * sizeof(SpinLock)",
+            "sharehash_pagepool": "(slot capacity + T table locks + 1 budget lock) * sizeof(SpinLock)",
             "other_hashmaps": "No deduction; zero does not imply absence of internal locks.",
             "retained": "Padding, pointer fields and allocator metadata remain; RSS and timing are actual measurements with locks executing.",
         },
+        "budget_csv_fields": list(BUDGET_CSV_FIELDS),
+        "budget_diagnostics_policy": "PagePool B after-insert ledger includes locks; finite physical cap is not configured (size_t max). Partial workloads are failures, with stored-key ratios retained only as diagnostics.",
         "hashmap_parameters": {
             "sharehash": {"variant": "current repaired single table", "initial_total_buckets": 5000, "initial_total_slots": 20000},
             "sharehash_subtable": {"T": 16, "T_policy": "auto: floor_pow2(min(256,max(1,initial_total_buckets//256)))", "max_load_factor": 0.8, "initial_total_buckets": 5000, "initial_total_slots": 20000},
+            "sharehash_pagepool": {"T": 32, "max_load_factor": 0.8, "min_load_factor": 0.75, "a_stable_factor": 48, "a_migration_factor": 48, "additive_policy": "automatic object plus initial owned storage", "physical_limit_bytes": UINT64_MAX, "physical_limit_policy": "default size_t max, no finite external cap", "initial_total_buckets": 5000, "initial_total_slots": 20480, "page_slots": 128, "fallback": "none", "variant": "PagePool B; stable record pages and linear-hash handle splits", "source_header": "include/ShareHash_pagepoolB.h", "directory": "four-level radix", "min_load_policy": "global added slots beyond initial capacity", "record_migration": "none"},
         },
         "summary_policy": "Median numeric metrics from numeric CSV rows, including rows with "
                           "correctness failures; inspect correctness_pass_count and success/hit minima.",
@@ -507,6 +592,8 @@ def main():
     finally:
         if pinned_cpu is not None:
             os.sched_setaffinity(0, original_affinity)
+        manifest["budget_diagnostic_errors"] = attach_budget_diagnostics(
+            result_dir / "space_budget_results.csv", manifest["jobs"])
         write_summary(result_dir / "summary.csv", manifest["jobs"], args.hashmaps, args.sizes)
         write_memory_summary(result_dir / "memory_summary.csv", manifest["jobs"], args.hashmaps, args.sizes)
         passed = sum(job["status"] == "passed" for job in manifest["jobs"])
@@ -520,6 +607,8 @@ def main():
             manifest["benchmark_results_sha256"] = sha256(csv_path)
         if memory_csv_path.exists():
             manifest["memory_results_sha256"] = sha256(memory_csv_path)
+        if (result_dir / "space_budget_results.csv").exists():
+            manifest["space_budget_results_sha256"] = sha256(result_dir / "space_budget_results.csv")
         manifest["summary_sha256"] = sha256(result_dir / "summary.csv")
         manifest["memory_summary_sha256"] = sha256(result_dir / "memory_summary.csv")
         write_manifest(manifest_path, manifest)

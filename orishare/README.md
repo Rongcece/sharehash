@@ -20,13 +20,13 @@ make -j8
 ./benchmark -t $(hashmap_type) -d $(dataset_number)
 ```
 
-Our benchmark now support the following hashmaps:
+The default benchmark suite compares these six hashmaps:
 1. unordered_map
 2. sharehash
-3. mapembed
-4. cuckoohash
-5. sparsehash
-6. sharehash_subtable (independent subtable variant)
+3. cuckoohash
+4. sparsehash
+5. sharehash_subtable (independent subtable variant)
+6. sharehash_pagepool (shared page-pool variant)
 
 ## CSV results and single-thread evaluation
 
@@ -49,7 +49,7 @@ cmake --build build-single-thread --target benchmark -j4
 python3 benchmark/run_single_thread.py --binary build-single-thread/benchmark
 ```
 
-The runner evaluates all six implementations at 100,000, 1,000,000 and 5,000,000
+The runner evaluates six implementations (excluding MapEmbed and SpaceLimitA) at 100,000, 1,000,000 and 5,000,000
 keys, with three repetitions each (54 separate processes). Each repetition uses
 the same dataset seed for every implementation. It pins execution to one allowed
 CPU and sets `OMP_NUM_THREADS=1` and `OMP_DYNAMIC=FALSE`. Output goes to a fresh
@@ -97,7 +97,9 @@ valid full-dataset memory comparisons.
   lock-object storage. Each is the corresponding raw byte count minus
   `lock_memory_bytes`, then divided by the requested key count for BPK. Single-table
   ShareHash subtracts `(slot_capacity + 1) * sizeof(SpinLock)`; the subtable version
-  subtracts `(total_slot_capacity + T) * sizeof(SpinLock)`. The table locks embedded
+  subtracts `(total_slot_capacity + T) * sizeof(SpinLock)`. The V2-A variant
+  subtracts `(total_slot_capacity + T + 1) * sizeof(SpinLock)` to include its
+  additional global budget lock. The table locks embedded
   in their objects are included. Padding, pointer fields and allocator metadata
   remain. Both original raw fields and the deduction are retained for auditing.
   Other implementations report zero deduction; this does not assert that their
@@ -150,3 +152,16 @@ insertion failures, and nine MapEmbed runs aborted. The report provides separate
 `valid_only_*` CSVs and a comparison matched by valid seed. The runner's standard
 summary files retain failed numeric samples for diagnostics; always inspect their
 pass counts. A completed process is not sufficient to establish a valid index.
+
+### Shared page-pool benchmark competitor
+
+`-t sharehash_pagepool` selects `include/ShareHash_pagepoolB.h` through a
+benchmark-only type-name isolation adapter. The algorithm header is unchanged.
+The default suite compares single-table, subtable, page-pool ShareHash,
+unordered_map, CuckooHash and SparseHash. MapEmbed and SpaceLimitA are excluded.
+PagePool B uses default parameters (stable/migration factors both 48 bytes/key) and emits `space_budget_results.csv` for
+configuration, rejection and requested-byte ledger diagnostics. The default
+physical cap is size_t max; affine admission remains enabled. Lock deduction
+is `(physical slot capacity + T + 1) * sizeof(SpinLock)`.
+
+The shared page-pool run is recorded in [result/six_hashes_pagepool_20261027/RESULTS.md](result/six_hashes_pagepool_20261027/RESULTS.md).

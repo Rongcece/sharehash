@@ -1349,6 +1349,9 @@ CMakeFiles/benchmark.dir/benchmark/benchmark.cpp.o: \
  /home/wmz/sharehash/orishare/benchmark/./competitors/ShareHash/../MapInterface.h \
  /home/wmz/sharehash/orishare/benchmark/./competitors/ShareHash/ShareHashSubtableInterface.h \
  /home/wmz/sharehash/orishare/include/ShareHash_subtable.h \
+ /home/wmz/sharehash/orishare/benchmark/./competitors/ShareHash/ShareHashPagePoolInterface.h \
+ /home/wmz/sharehash/orishare/include/ShareHash_pagepoolB.h \
+ /home/wmz/sharehash/orishare/benchmark/./competitors/ShareHash/../../ResultWriter.h \
  /home/wmz/sharehash/orishare/benchmark/./competitors/UnorderedMap/UnorderedMapInterface.h \
  /home/wmz/sharehash/orishare/benchmark/./competitors/UnorderedMap/../MapInterface.h \
  /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \

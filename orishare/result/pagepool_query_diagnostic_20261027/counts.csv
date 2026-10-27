@@ -1,0 +1,4 @@
+n,home_buckets,pages,samples,failures,slots_per_get,occupied_per_get,directory_hops_per_get
+100000,5000,994,1000,0,15.374,11.257,0
+1000000,5000,9784,1000,0,133.181,100.865,702.256
+5000000,5000,48843,1000,0,633.573,500.78,19414.9
