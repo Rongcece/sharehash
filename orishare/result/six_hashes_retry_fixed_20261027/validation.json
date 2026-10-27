@@ -1,0 +1,56 @@
+{
+  "checked_utc": "2026-10-27T05:20:12+00:00",
+  "status": "passed",
+  "scope": "Artifact integrity and consistency; benchmark has nine preserved MapEmbed failures.",
+  "expected_jobs": 54,
+  "observed_jobs": 54,
+  "passed_jobs": 45,
+  "failed_jobs": 9,
+  "passed_by_hashmap": {
+    "sharehash": 9,
+    "sharehash_subtable": 9,
+    "unorderedmap": 9,
+    "cuckoohash": 9,
+    "sparsehash": 9
+  },
+  "failed_by_hashmap": {
+    "mapembed": 9
+  },
+  "primary_csv_row_counts": {
+    "benchmark_results.csv": 45,
+    "memory_results.csv": 51,
+    "summary.csv": 18,
+    "memory_summary.csv": 18
+  },
+  "source_file_count_verified": 23,
+  "source_changes_from_previous_six_index_run": [
+    "include/ShareHash_subtable.h"
+  ],
+  "binary_flags_and_all_source_checksums_verified": true,
+  "all_job_parameter_combinations_and_embedded_csv_rows_verified": true,
+  "raw_heap_rss_formulas_verified": true,
+  "lock_deduction_formulas_verified": true,
+  "all_five_bpk_formulas_verified": true,
+  "all_summary_medians_and_counts_verified": true,
+  "valid_only_excludes_failed_processes": true,
+  "subtable_passed_runs": 9,
+  "subtable_planned_runs": 9,
+  "matched_seeds_by_size": {
+    "100000": "20261025;20261026;20261027",
+    "1000000": "20261025;20261026;20261027",
+    "5000000": "20261025;20261026;20261027"
+  },
+  "per_insert_placement_growth_limit": 4,
+  "rss_and_throughput_are_actual_with_locks": true,
+  "correctness_scope": "Insertion success count and lookup hit count, not full value validation in benchmark.",
+  "artifact_sha256": {
+    "RESULTS.md": "68518852deab2f2d58cbffbeca324c109601204dfc47c4f6c844f4d4392b1fad",
+    "benchmark_results.csv": "ffe2a19d6487bdcd0188a11df2ff90dfeb6da48f544467584722a65625d898b1",
+    "memory_results.csv": "c5ed439e84814d642ca9024e13b08a21d5c8a13174ab0b4367de5de74fc7f363",
+    "memory_summary.csv": "7ed52e62f03cf2a14d2ad9f8a49808b0ebd3c074d83b8ed647f50546ba52c931",
+    "sharehash_matched_comparison.csv": "fc331050db40857fd9dfbcb482bba0ca29e72c66e23328a832284fcd7ade1a0e",
+    "summary.csv": "14f82e349eba7c4fcc414307ec85c925ac31bb43f0e3a16315e263d53fc24c49",
+    "valid_only_memory_summary.csv": "e34edeebaeb916c754306a87e23c3c48d31f60109bbfc96afd33f3bcb9f1d225",
+    "valid_only_summary.csv": "e762bda76f229f87087ed0da841573c9fe3fb5bb0abd21754c984e866dba004b"
+  }
+}

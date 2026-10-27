@@ -78,6 +78,7 @@ struct Result {
     MemorySnapshot after_init;
     MemorySnapshot before_insert;
     MemorySnapshot after_workload;
+    long long lock_memory_bytes; // ShareHash lock objects only; actual locks still execute.
 };
 
 inline void ensure_directory(const std::string& directory) {
@@ -143,12 +144,18 @@ inline std::string append_csv(const std::string& directory, const Result& result
         "peak_process_rss_bytes,dataset_payload_bytes,input_heap_bytes_estimate,"
         "input_rss_bytes_estimate,rss_before_init_bytes,rss_after_init_bytes,"
         "rss_before_insert_bytes,heap_before_init_bytes,heap_after_init_bytes,"
-        "heap_before_insert_bytes,heap_after_workload_bytes");
+        "heap_before_insert_bytes,heap_after_workload_bytes,lock_memory_bytes,"
+        "reported_memory_excluding_locks_bytes,reported_bpk_excluding_locks_bytes_per_key,"
+        "index_heap_excluding_locks_bytes_estimate,heap_bpk_excluding_locks_bytes_per_key");
     const long long index_heap = result.after_init.heap_bytes - result.before_init.heap_bytes
         + result.after_workload.heap_bytes - result.before_insert.heap_bytes;
     const long long index_rss = result.after_init.rss_bytes - result.before_init.rss_bytes
         + result.after_workload.rss_bytes - result.before_insert.rss_bytes;
     const double keys = result.dataset_size;
+    if (result.lock_memory_bytes < 0 || result.lock_memory_bytes > result.reported_memory_bytes)
+        throw std::runtime_error("Invalid lock-memory deduction");
+    const long long reported_excluding_locks = result.reported_memory_bytes - result.lock_memory_bytes;
+    const long long heap_excluding_locks = index_heap - result.lock_memory_bytes;
     output << utc_timestamp() << ',' << result.hashmap_type << ',' << result.dataset_size << ','
         << result.thread_count << ',' << result.seed << ',' << result.insert_successes << ','
         << result.lookup_hits << ',' << result.insert_seconds << ',' << result.read_seconds << ','
@@ -162,7 +169,9 @@ inline std::string append_csv(const std::string& directory, const Result& result
         << result.before_init.rss_bytes << ',' << result.after_init.rss_bytes << ','
         << result.before_insert.rss_bytes << ',' << result.before_init.heap_bytes << ','
         << result.after_init.heap_bytes << ',' << result.before_insert.heap_bytes << ','
-        << result.after_workload.heap_bytes << '\n';
+        << result.after_workload.heap_bytes << ',' << result.lock_memory_bytes << ','
+        << reported_excluding_locks << ',' << reported_excluding_locks / keys << ','
+        << heap_excluding_locks << ',' << heap_excluding_locks / keys << '\n';
     output.close();
     if (!output) {
         throw std::runtime_error("Failed to write result CSV: " + path);
@@ -182,12 +191,18 @@ inline std::string append_memory_csv(const std::string& directory, const Result&
         "peak_process_rss_bytes,dataset_payload_bytes,input_heap_bytes_estimate,"
         "input_rss_bytes_estimate,rss_before_init_bytes,rss_after_init_bytes,"
         "rss_before_insert_bytes,heap_before_init_bytes,heap_after_init_bytes,"
-        "heap_before_insert_bytes,heap_after_insert_bytes");
+        "heap_before_insert_bytes,heap_after_insert_bytes,lock_memory_bytes,"
+        "reported_memory_excluding_locks_bytes,reported_bpk_excluding_locks_bytes_per_key,"
+        "index_heap_excluding_locks_bytes_estimate,heap_bpk_excluding_locks_bytes_per_key");
     const long long index_heap = result.after_init.heap_bytes - result.before_init.heap_bytes
         + result.after_workload.heap_bytes - result.before_insert.heap_bytes;
     const long long index_rss = result.after_init.rss_bytes - result.before_init.rss_bytes
         + result.after_workload.rss_bytes - result.before_insert.rss_bytes;
     const double keys = result.dataset_size;
+    if (result.lock_memory_bytes < 0 || result.lock_memory_bytes > result.reported_memory_bytes)
+        throw std::runtime_error("Invalid lock-memory deduction");
+    const long long reported_excluding_locks = result.reported_memory_bytes - result.lock_memory_bytes;
+    const long long heap_excluding_locks = index_heap - result.lock_memory_bytes;
     output << utc_timestamp() << ",after_insert," << result.hashmap_type << ',' << result.dataset_size << ','
         << result.thread_count << ',' << result.seed << ',' << result.insert_successes << ','
         << result.insert_seconds << ',' << keys / result.insert_seconds << ','
@@ -200,7 +215,9 @@ inline std::string append_memory_csv(const std::string& directory, const Result&
         << result.before_init.rss_bytes << ',' << result.after_init.rss_bytes << ','
         << result.before_insert.rss_bytes << ',' << result.before_init.heap_bytes << ','
         << result.after_init.heap_bytes << ',' << result.before_insert.heap_bytes << ','
-        << result.after_workload.heap_bytes << '\n';
+        << result.after_workload.heap_bytes << ',' << result.lock_memory_bytes << ','
+        << reported_excluding_locks << ',' << reported_excluding_locks / keys << ','
+        << heap_excluding_locks << ',' << heap_excluding_locks / keys << '\n';
     output.close();
     if (!output) {
         throw std::runtime_error("Failed to write insertion memory CSV: " + path);

@@ -1,0 +1,11 @@
+Hashmap type: unorderedmap
+Dataset size: 100000
+Thread number: 1
+Hashmap insert throughput: 6.57988e+06 elements/second
+Hashmap read throughput: 2.71083e+07 elements/second
+Space consumption: 56bytes
+Index BPK (reported bytes/key): 0.00056
+Lock object bytes excluded from adjusted metrics: 0
+Index BPK (reported, excluding lock object bytes): 0.00056
+Successful inserts: 100000, lookup hits: 100000
+Results saved to: /home/wmz/sharehash/orishare/result/six_hashes_retry_fixed_20261027/benchmark_results.csv

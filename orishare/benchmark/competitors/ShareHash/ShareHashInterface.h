@@ -22,6 +22,8 @@ public:
 
     long long memory_consumption();
 
+    long long lock_memory_consumption() override;
+
 private:
     std::unique_ptr<ShareHash::sharehash<Key, Value>> index;
 
@@ -52,6 +54,14 @@ bool ShareHashInterface<Key, Value>::insert(Key key, Value val) {
 template<class Key, class Value>
 long long ShareHashInterface<Key, Value>::memory_consumption() {
     return index->memoryUsage();
+}
+
+template<class Key, class Value>
+long long ShareHashInterface<Key, Value>::lock_memory_consumption() {
+    // One lock per slot plus the table-level resize lock embedded in the
+    // index object. Actual allocation and locking behavior remain unchanged.
+    return index ? (index->getItemNumber() + 1)
+        * static_cast<long long>(sizeof(ShareHash::SpinLock)) : 0;
 }
 
 

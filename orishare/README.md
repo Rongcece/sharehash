@@ -26,6 +26,7 @@ Our benchmark now support the following hashmaps:
 3. mapembed
 4. cuckoohash
 5. sparsehash
+6. sharehash_subtable (independent subtable variant)
 
 ## CSV results and single-thread evaluation
 
@@ -48,8 +49,8 @@ cmake --build build-single-thread --target benchmark -j4
 python3 benchmark/run_single_thread.py --binary build-single-thread/benchmark
 ```
 
-The runner evaluates all five implementations at 100,000, 1,000,000 and 5,000,000
-keys, with three repetitions each (45 separate processes). Each repetition uses
+The runner evaluates all six implementations at 100,000, 1,000,000 and 5,000,000
+keys, with three repetitions each (54 separate processes). Each repetition uses
 the same dataset seed for every implementation. It pins execution to one allowed
 CPU and sets `OMP_NUM_THREADS=1` and `OMP_DYNAMIC=FALSE`. Output goes to a fresh
 `result/single_thread_<UTC time>/` directory containing `benchmark_results.csv`,
@@ -58,9 +59,11 @@ CPU and sets `OMP_NUM_THREADS=1` and `OMP_DYNAMIC=FALSE`. Output goes to a fresh
 checksums and validation), and per-run logs. Existing result directories are not overwritten.
 Use `--sizes`, `--repeats`, `--seed` or `--result-dir` to customize the suite.
 
-The original initialization order, random uint64 key/value workload, hash
-implementations, hash parameters, insertion/query order and throughput formula
-are retained. The optional `--seed` makes the dataset reproducible; when omitted,
+For the original five implementations, initialization order, random uint64
+key/value workload, hash parameters, insertion/query order and throughput formula
+are retained. The separate `sharehash_subtable` adapter uses the current subtable
+implementation unchanged: automatic T=16, maximum load factor 0.8, and the same
+20,000 initial total slots as the single-table ShareHash. The optional `--seed` makes the dataset reproducible; when omitted,
 the original random-device seeding is used. The two loops additionally count
 successful insert returns and query hits. The runner checks both against the
 requested size; it does not validate returned values (the existing MapEmbed
@@ -87,11 +90,26 @@ valid full-dataset memory comparisons.
   allocator block rounding and reserved arrays, including untouched pages.
   glibc >= 2.33 uses `mallinfo2`; older versions use `mallinfo` and reject negative
   counters caused by signed 32-bit overflow.
+- New runs use `reported_memory_excluding_locks_bytes` /
+  `reported_bpk_excluding_locks_bytes_per_key` and
+  `index_heap_excluding_locks_bytes_estimate` /
+  `heap_bpk_excluding_locks_bytes_per_key` for comparisons excluding ShareHash
+  lock-object storage. Each is the corresponding raw byte count minus
+  `lock_memory_bytes`, then divided by the requested key count for BPK. Single-table
+  ShareHash subtracts `(slot_capacity + 1) * sizeof(SpinLock)`; the subtable version
+  subtracts `(total_slot_capacity + T) * sizeof(SpinLock)`. The table locks embedded
+  in their objects are included. Padding, pointer fields and allocator metadata
+  remain. Both original raw fields and the deduction are retained for auditing.
+  Other implementations report zero deduction; this does not assert that their
+  implementations contain no locks. The deduction happens outside timed loops;
+  all actual locks still execute, so throughput includes locking costs.
 - `index_rss_bytes_estimate` and `rss_bpk_bytes_per_key` estimate the index's
   resident footprint using `/proc/self/smaps_rollup`. Untouched reserved pages
   do not contribute in full. Raw `process_rss_bytes` and
   `peak_process_rss_bytes` include the input dataset and process/runtime overhead;
-  they are not index-only memory or index-only peak memory.
+  they are not index-only memory or index-only peak memory. RSS remains an actual
+  measurement with locks present: page residency cannot be converted to a true
+  lock-free RSS by subtracting object byte counts.
 
 Memory snapshots are taken before index initialization, after initialization,
 after generating the dataset (before insertion), after insertion, and after the workload. All
@@ -124,3 +142,11 @@ runs (at 5 million keys, before the insertion checkpoint). These existing hashma
 issues were preserved. The runner exits nonzero when any job fails; failure logs
 and available memory checkpoints remain saved. Inspect validity counts before
 using summary metrics as comparisons.
+
+The six-index run with both ShareHash variants and lock-object memory deduction is
+recorded in [result/six_hashes_excluding_locks_20261027/RESULTS.md](result/six_hashes_excluding_locks_20261027/RESULTS.md).
+It attempted all 54 jobs: 40 passed, five subtable ShareHash runs had explicit
+insertion failures, and nine MapEmbed runs aborted. The report provides separate
+`valid_only_*` CSVs and a comparison matched by valid seed. The runner's standard
+summary files retain failed numeric samples for diagnostics; always inspect their
+pass counts. A completed process is not sufficient to establish a valid index.

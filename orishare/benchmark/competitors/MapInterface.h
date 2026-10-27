@@ -20,6 +20,11 @@ public:
 
     virtual long long memory_consumption() = 0;
 
+    // Separately identified lock storage, used only for explicit memory/BPK
+    // adjustments. Zero means no exclusion is supplied by this adapter; it
+    // does not assert that the implementation contains no locks.
+    virtual long long lock_memory_consumption() { return 0; }
+
     virtual ~MapInterface() = default;
 
 };

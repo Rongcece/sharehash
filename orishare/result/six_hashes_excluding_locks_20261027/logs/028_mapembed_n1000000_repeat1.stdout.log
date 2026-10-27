@@ -1,0 +1,4 @@
+Hashmap type: mapembed
+Dataset size: 1000000
+Thread number: 1
+Hashmap insert throughput: 2.56208e+06 elements/second

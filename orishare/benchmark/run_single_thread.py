@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the five existing hash benchmarks in separate single-thread processes.
+"""Run the six hash benchmarks (including both ShareHash variants) in separate single-thread processes.
 
 Example (from the project root):
     python3 benchmark/run_single_thread.py --binary build/benchmark
@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-HASHMAPS = ("sharehash", "unorderedmap", "mapembed", "cuckoohash", "sparsehash")
+HASHMAPS = ("sharehash", "sharehash_subtable", "unorderedmap", "mapembed", "cuckoohash", "sparsehash")
 CSV_FIELDS = (
     "timestamp_utc", "hashmap_type", "dataset_size", "thread_count", "seed",
     "insert_successes", "lookup_hits", "insert_seconds", "read_seconds",
@@ -36,6 +36,9 @@ CSV_FIELDS = (
     "input_heap_bytes_estimate", "input_rss_bytes_estimate", "rss_before_init_bytes",
     "rss_after_init_bytes", "rss_before_insert_bytes", "heap_before_init_bytes",
     "heap_after_init_bytes", "heap_before_insert_bytes", "heap_after_workload_bytes",
+    "lock_memory_bytes", "reported_memory_excluding_locks_bytes",
+    "reported_bpk_excluding_locks_bytes_per_key", "index_heap_excluding_locks_bytes_estimate",
+    "heap_bpk_excluding_locks_bytes_per_key",
 )
 METRIC_FIELDS = CSV_FIELDS[7:]
 MEMORY_CSV_FIELDS = (
@@ -47,6 +50,9 @@ MEMORY_CSV_FIELDS = (
     "input_rss_bytes_estimate", "rss_before_init_bytes", "rss_after_init_bytes",
     "rss_before_insert_bytes", "heap_before_init_bytes", "heap_after_init_bytes",
     "heap_before_insert_bytes", "heap_after_insert_bytes",
+    "lock_memory_bytes", "reported_memory_excluding_locks_bytes",
+    "reported_bpk_excluding_locks_bytes_per_key", "index_heap_excluding_locks_bytes_estimate",
+    "heap_bpk_excluding_locks_bytes_per_key",
 )
 MEMORY_METRIC_FIELDS = MEMORY_CSV_FIELDS[6:]
 UINT64_MAX = (1 << 64) - 1
@@ -97,6 +103,28 @@ def read_results(path, fields=CSV_FIELDS):
         return rows
 
 
+def validate_lock_accounting(row, hashmap, size):
+    errors = []
+    try:
+        locks = int(row["lock_memory_bytes"])
+        if locks < 0 or (hashmap in ("sharehash", "sharehash_subtable") and locks == 0):
+            errors.append("invalid ShareHash lock-object byte count")
+        if hashmap not in ("sharehash", "sharehash_subtable") and locks != 0:
+            errors.append("unexpected lock deduction for another hashmap")
+        for source, adjusted, bpk in (
+            ("reported_memory_bytes", "reported_memory_excluding_locks_bytes", "reported_bpk_excluding_locks_bytes_per_key"),
+            ("index_heap_bytes_estimate", "index_heap_excluding_locks_bytes_estimate", "heap_bpk_excluding_locks_bytes_per_key"),
+        ):
+            expected = int(row[source]) - locks
+            if int(row[adjusted]) != expected:
+                errors.append(adjusted + " does not equal raw bytes minus lock objects")
+            if not math.isclose(float(row[bpk]), expected / size, rel_tol=1e-12, abs_tol=1e-12):
+                errors.append(bpk + " does not equal adjusted bytes divided by requested keys")
+    except (ValueError, TypeError, KeyError):
+        errors.append("lock-accounting fields are invalid")
+    return errors
+
+
 def validate_row(row, hashmap, size, seed):
     errors = []
     expected = {"hashmap_type": hashmap, "dataset_size": str(size),
@@ -127,6 +155,7 @@ def validate_row(row, hashmap, size, seed):
                 errors.append(field + " must be positive")
         except ValueError:
             pass  # Already reported by the numeric-field validation above.
+    errors.extend(validate_lock_accounting(row, hashmap, size))
     return errors
 
 
@@ -158,6 +187,7 @@ def validate_memory_row(row, hashmap, size, seed):
                 errors.append(field + " must be positive")
         except ValueError:
             pass
+    errors.extend(validate_lock_accounting(row, hashmap, size))
     return errors
 
 
@@ -357,6 +387,18 @@ def main():
                                   ("OMP_NUM_THREADS", "OMP_DYNAMIC", "GMON_OUT_PREFIX")},
         "csv_fields": list(CSV_FIELDS), "memory_csv_fields": list(MEMORY_CSV_FIELDS),
         "memory_phase": "after_insert", "bpk_unit": "bytes/key",
+        "primary_memory_metric": "heap_bpk_excluding_locks_bytes_per_key",
+        "lock_accounting": {
+            "policy": "For both ShareHash variants, subtract lock-object bytes from raw reported and estimated heap bytes; retain raw columns for auditing.",
+            "sharehash": "(slot capacity + 1 table lock) * sizeof(SpinLock)",
+            "sharehash_subtable": "(total slot capacity + T table locks) * sizeof(SpinLock)",
+            "other_hashmaps": "No deduction; zero does not imply absence of internal locks.",
+            "retained": "Padding, pointer fields and allocator metadata remain; RSS and timing are actual measurements with locks executing.",
+        },
+        "hashmap_parameters": {
+            "sharehash": {"variant": "current repaired single table", "initial_total_buckets": 5000, "initial_total_slots": 20000},
+            "sharehash_subtable": {"T": 16, "T_policy": "auto: floor_pow2(min(256,max(1,initial_total_buckets//256)))", "max_load_factor": 0.8, "initial_total_buckets": 5000, "initial_total_slots": 20000},
+        },
         "summary_policy": "Median numeric metrics from numeric CSV rows, including rows with "
                           "correctness failures; inspect correctness_pass_count and success/hit minima.",
         "memory_summary_policy": "Median after-insert numeric metrics, including samples from "

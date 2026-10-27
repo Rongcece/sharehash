@@ -1,0 +1,61 @@
+{
+  "checked_utc": "2026-10-27T04:58:16+00:00",
+  "status": "passed",
+  "scope": "Artifact consistency checks passed; 14 benchmark failures remain recorded and excluded from valid-only summaries.",
+  "expected_jobs": 54,
+  "observed_jobs": 54,
+  "passed_jobs": 40,
+  "failed_jobs": 14,
+  "passed_by_hashmap": {
+    "sharehash": 9,
+    "sharehash_subtable": 4,
+    "unorderedmap": 9,
+    "cuckoohash": 9,
+    "sparsehash": 9
+  },
+  "failed_by_hashmap": {
+    "mapembed": 9,
+    "sharehash_subtable": 5
+  },
+  "primary_csv_counts": {
+    "benchmark_results.csv": 45,
+    "memory_results.csv": 51,
+    "summary.csv": 18,
+    "memory_summary.csv": 18
+  },
+  "source_file_count_verified": 23,
+  "both_hash_algorithm_headers_unchanged": true,
+  "all_source_binary_and_primary_csv_hashes_verified": true,
+  "all_raw_memory_formulas_and_five_bpk_formulas_verified": true,
+  "both_lock_deductions_verified": true,
+  "spinlock_size_bytes": 1,
+  "rss_is_actual_including_locks": true,
+  "throughput_includes_lock_execution": true,
+  "valid_only_rows_are_from_passed_jobs_only": true,
+  "subtable_valid_counts_by_size": {
+    "100000": 2,
+    "1000000": 1,
+    "5000000": 1
+  },
+  "matched_seed_counts_by_size": {
+    "100000": 2,
+    "1000000": 1,
+    "5000000": 1
+  },
+  "subtable_diagnosis": "Last home bucket is full before and after successful doubling; the single post-growth placement retry returns false. All successful keys in two 1M diagnostic replays have correct values.",
+  "diagnostic_instrumented_and_unmodified_failure_records_agree": true,
+  "artifact_sha256": {
+    "RESULTS.md": "2c2fd03bdd61b8c88900d143dd0f054c56f93b46230cd55c6a954389c22634b3",
+    "benchmark_results.csv": "9ada39f4dc565ee46fb4b68dbad126e8cdcf200fbeb34d0184d54bebefbc3985",
+    "diagnostics/ShareHash_subtable_diagnostic.h": "ef0b8d512c3dc227cab6730438c8982a22c4a48d572d1530c9319fdc54fc1c4e",
+    "diagnostics/instrumented.log": "7690bc04ea402ddbf35b05bc2c6f54fb7317608b5966f84d605d2d7ddf0ed4e0",
+    "diagnostics/sharehash_subtable_diagnostic.cpp": "8580f1a8126abd490d5cc5502c90b6207c27df73d87b316825ba66ba5769b900",
+    "diagnostics/unmodified.log": "2c8fbdd2d8eb954e9655738351d0c175266149a85a2fe955588b2b8aa9c7ced3",
+    "memory_results.csv": "2818b4a100cb8bf1da2291b5b39d446e8d67553f9491c5d96163040e0302dffd",
+    "memory_summary.csv": "4ceaf404b0a0f89682bf36cc39011b014aa1bdc9bb9eb4cc7147499ab56ed6d8",
+    "sharehash_matched_comparison.csv": "ae95ff5d758f5e7a001ddc7386d3b025c381097c367578f67ced2b248cb872fb",
+    "summary.csv": "a328ac844152228137ebf8f6fadc291429ffcd7cac2c0e3e129fda352b58342f",
+    "valid_only_memory_summary.csv": "b0567fbf316729ec3ffb8c83fea50b75d31e5b75f1cbe644ca4efaad126f844f",
+    "valid_only_summary.csv": "005405605be1aba2c735c8f6b86cabd1372678d60576b8b462e3e86fbe64c1a7"
+  }
+}

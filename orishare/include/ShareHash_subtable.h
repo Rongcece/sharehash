@@ -320,7 +320,7 @@ public:
 
     // [子表化修改7] 写入前检查目标子表的投影负载 (size+1)/capacity。
     // 超过阈值仅 resize_locked(id)。借位失败仍保留原局部增长兜底。
-    // 同一次写入至多因借位失败再增长一次，避免病态碰撞导致无限倍增。
+    // 同一次写入因借位失败最多额外增长4次，避免病态碰撞导致无限倍增。
     bool insert(const Key& key, const Value& value) {
         if (!top_indexes_) return false;
         const std::uint64_t hash = mixed_hash(key);
@@ -331,9 +331,20 @@ public:
                static_cast<long double>(max_load_factor_) * table.item_num) {
             if (!resize_locked(id, table)) return false;
         }
-        if (insert_without_growth(table, key, value, local_hash(hash))) return true;
-        if (!resize_locked(id, table)) return false;
-        return insert_without_growth(table, key, value, local_hash(hash));
+        // [插入重试修复] 原有负载阈值检查不变；借位失败最多额外扩容4次。
+        // 每次仍只扩容并重试当前子表，避免末桶连续冲突时过早返回 false。
+        constexpr unsigned max_growth_attempts = 4;
+        for (unsigned growths = 0; ; ++growths) {
+            if (insert_without_growth(table, key, value, local_hash(hash)))
+                return true;
+
+            if (growths == max_growth_attempts)
+                return false;
+
+            // 仍持有当前子表锁，只扩容这一张子表。
+            if (!resize_locked(id, table))
+                return false;
+        }
     }
 
     bool remove(const Key& key) {

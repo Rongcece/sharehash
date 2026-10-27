@@ -14,6 +14,7 @@
 #include "./competitors/MapInterface.h"
 #include "./competitors/MapEmbed/MapEmbedInterface.h"
 #include "./competitors/ShareHash/ShareHashInterface.h"
+#include "./competitors/ShareHash/ShareHashSubtableInterface.h"
 #include "./competitors/UnorderedMap/UnorderedMapInterface.h"
 #include "./competitors/Cuckoo/CuckooMapInterface.h"
 #include "./competitors/SparseHash/SparseHash.h"
@@ -83,6 +84,10 @@ int main(int argc, char** argv)
         else if (hashmapType == "sharehash")
         {
             config.hashmap = std::make_unique<ShareHashInterface<uint64_t, uint64_t>>();
+        }
+        else if (hashmapType == "sharehash_subtable")
+        {
+            config.hashmap = std::make_unique<ShareHashSubtableInterface<uint64_t, uint64_t>>();
         }
         else if (hashmapType == "cuckoohash")
         {
@@ -192,13 +197,15 @@ int main(int argc, char** argv)
 
     // Save an untimed insertion checkpoint even if the original query code aborts.
     const long long reported_memory_after_insert = config.hashmap->memory_consumption();
+    const long long lock_memory_after_insert = config.hashmap->lock_memory_consumption();
     const auto memory_after_insert = benchmark_results::sample_memory();
     try {
         const benchmark_results::Result result {
             hashmapType, config.datasetNumber, config.threadNumber, seed,
             insert_successes, 0, insert_seconds, 0.0, reported_memory_after_insert,
             static_cast<long long>(dataset.size() * sizeof(dataset[0])),
-            memory_before_init, memory_after_init, memory_before_insert, memory_after_insert
+            memory_before_init, memory_after_init, memory_before_insert, memory_after_insert,
+            lock_memory_after_insert
         };
         benchmark_results::append_memory_csv(vm["result-dir"].as<std::string>(), result);
     } catch (const std::exception& error) {
@@ -235,9 +242,13 @@ int main(int argc, char** argv)
     //memory consumption
     const long long reported_memory = config.hashmap->memory_consumption();
     std::cout << "Space consumption: " << reported_memory << "bytes" << std::endl;
+    const long long lock_memory = config.hashmap->lock_memory_consumption();
     const auto memory_after_workload = benchmark_results::sample_memory();
     std::cout << "Index BPK (reported bytes/key): "
               << static_cast<double>(reported_memory) / config.datasetNumber << std::endl;
+    std::cout << "Lock object bytes excluded from adjusted metrics: " << lock_memory << std::endl;
+    std::cout << "Index BPK (reported, excluding lock object bytes): "
+              << static_cast<double>(reported_memory - lock_memory) / config.datasetNumber << std::endl;
     std::cout << "Successful inserts: " << insert_successes
               << ", lookup hits: " << lookup_hits << std::endl;
     try {
@@ -245,7 +256,8 @@ int main(int argc, char** argv)
             hashmapType, config.datasetNumber, config.threadNumber, seed,
             insert_successes, lookup_hits, insert_seconds, read_seconds, reported_memory,
             static_cast<long long>(dataset.size() * sizeof(dataset[0])),
-            memory_before_init, memory_after_init, memory_before_insert, memory_after_workload
+            memory_before_init, memory_after_init, memory_before_insert, memory_after_workload,
+            lock_memory
         };
         const auto path = benchmark_results::append_csv(vm["result-dir"].as<std::string>(), result);
         std::cout << "Results saved to: " << path << std::endl;
